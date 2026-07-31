@@ -50,25 +50,30 @@
 
          <label for="fullname">Full Name:</label>
 
-        <input type="text" id="fullname" name="fullname" placeholder="Enter you Full Name" autocomplete="name" require>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter you Full Name" autocomplete="name" required>
 
        <br><br>
 
        <label for="email">Email Adress:</label>
 
-        <input type="email" id="email" name="email" placeholder="Enter you Email" autocomplete="email" require>
+        <input type="email" id="email" name="email" placeholder="Enter you Email" autocomplete="email" required>
 
         <br><br>
 
          <label for="phone">Phone Number:</label>
 
-        <input type="phone" id="phone" name="phone" placeholder="Enter you Phone Number:" autocomplete="tel" require>
+        <input type="tel" id="phone" name="phone" placeholder="Enter you Phone Number:" autocomplete="tel" required>
 
         <br><br>
 
         <label for="dob">Date of Birth:</label>
 
-        <input type="dob" id="dob" name="dob" placeholder="Enter your Date of Birth" autocomplete="number" require>
+       <input
+type="date"
+id="dob"
+name="dob"
+autocomplete="bday"
+required>
         
       </fieldset>
 
@@ -112,7 +117,7 @@
 
         <select id="branch" name="brach"  required>
 
-          <option>select your branch</option>
+         <option value="">Select your branch</option>
 
           <option value="cse">Computer Science Engineering</option>
 
@@ -244,19 +249,13 @@
         <br><br>
 
         <fieldset>
-
-          <br>
           
           <legend>Add Skills</legend>
-
-          <ol>
 
             <label for="additionalSkills"></label>
 
           <textarea id="additionalSkills" name="additionalSkills" rows="5" cols="40" placeholder="Add extra skills you have...">
-          </textarea>
-
-          </ol>      
+          </textarea>     
 
         </fieldset>
 
@@ -304,10 +303,10 @@
 
 
       </fieldset>
+    
+    <p>
 
-      <p>
-
-    Already have an account?
+      Already have an account?
 
     <a href="login.html">
 
@@ -315,7 +314,11 @@
 
     </a>
 
-    <p>
+    </p>
+  
+    
+
+  <p>
 
     <a href="../index.html">
 
@@ -323,9 +326,9 @@
 
     </a>
 
-</p>
+  </p>
+    
 
-</p>
 
     </form>
 
@@ -333,7 +336,7 @@
 
   <footer>
 
-    <p>&copy 2026 Smart Student Career Portal</p>
+    <p> &copy; 2026 Smart Student Career Portal </p>
 
   </footer>
 
