@@ -1,239 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Profile | Smart Student Career Portal</title>
-  <link rel="stylesheet" href="../../CSS/style.css">
-</head>
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Portal | Smart Student Career Portal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+</head>
 
 <body>
 
-    <header>
+<header class="dashboard-header">
 
-  <h1>Student Profile</h1>
+    <div class="dashboard-logo">
 
-  <nav>
+        <h1>Smart Student Career Portal</h1>
 
-    <a href="Student-dashboard.html">Dashboard</a>
-     <a href="Student-dashboard.html">Profile</a>
-      <a href="../index.html">Home</a>
+        <p>Student Profile</p>
 
-  </nav>
+    </div>
+
+    <nav class="dashboard-nav">
+
+        <a href="../index.html">Home</a>
+
+        <a href="student-dashboard.html">Dashboard</a>
+
+        <a href="courses.html">Courses</a>
+
+        <a href="login.html">Logout</a>
+
+    </nav>
+
 </header>
 
-  <main>
+<main class="dashboard-main">
 
-    <section>
+<section class="welcome-card">
 
-      <h2>Profile Photo</h2>
+<h2>Student Profile 👨‍🎓</h2>
 
-      <img src="../images/profile.png" alt="Student Profile Photo" width="150" height="150">
-    </section>
+<p>
 
-    <section>
+View your academic details, skills, placement status and resume.
 
-      <h2>Personal Information</h2>
-      <p><strong>Full Name:</strong>Varshitha</p>
-      <p><strong>Email:</strong>meghadrivarshitha@gmail.com</p>
-      <p><strong>Phone:</strong>6309621484</p>
-      <p><strong>Date of Birth:</strong>20 may 2004</p>
-      <p><strong>Gender:</strong>Female</p>
-
-    </section>
-
-    <section>
-
-    <h2>Academic Information</h2>
-
-    <p><strong>College:</strong> Vignan University</p>
-
-    <p><strong>Department:</strong> Electronics and Communication Engineering</p>
-
-    <p><strong>Year:</strong> 4th Year</p>
-
-    <p><strong>Roll Number:</strong> 22L31A04XX</p>
+</p>
 
 </section>
 
-<section>
+<section class="dashboard-section">
 
-    <h2>Career Information</h2>
+<h2>Personal Information</h2>
 
-    <p><strong>Skills:</strong> HTML, CSS, JavaScript, Java, SQL</p>
+<table class="dashboard-table">
 
-    <p><strong>Career Objective:</strong>
+<tr>
 
-    Become a Full Stack Developer and work in a leading software company.
+<th>Name</th>
 
-    </p>
+<td>Meghadri Varshitha</td>
 
-</section>
+</tr>
 
-<section>
+<tr>
 
-    <h2>Resume</h2>
+<th>Roll Number</th>
 
-    <p>
+<td>22A91A0401</td>
 
-        Resume Uploaded Successfully
+</tr>
 
-    </p>
+<tr>
 
-</section>
+<th>Department</th>
 
-<section>
+<td>Electronics & Communication Engineering</td>
 
-    <h2>Certifications</h2>
+</tr>
 
-    <ul>
+<tr>
 
-        <li>Java Programming - ExcelR</li>
+<th>Email</th>
 
-        <li>Front-End Web Development - Reliance</li>
+<td>meghadrivarshitha@gmail.com</td>
 
-        <li>Power BI - Great Learning</li>
+</tr>
 
-    </ul>
+<tr>
 
-</section>
+<th>Phone</th>
 
-<section>
+<td>+91 6309621484</td>
 
-    <h2>Projects</h2>
+</tr>
 
-    <table>
-
-        <tr>
-
-            <th>Project</th>
-
-            <th>Technology</th>
-
-        </tr>
-
-        <tr>
-
-            <td>Resume Builder</td>
-
-            <td>HTML, CSS, JavaScript</td>
-
-        </tr>
-
-        <tr>
-
-            <td>Smart Student Career Portal</td>
-
-            <td>HTML</td>
-
-        </tr>
-
-        <tr>
-
-            <td>Power BI Dashboard</td>
-
-            <td>Power BI</td>
-
-        </tr>
-
-    </table>
+</table>
 
 </section>
 
-<section>
+<section class="dashboard-section">
 
-    <h2>Social Profiles</h2>
+<h2>Academic Details</h2>
 
-    <ul>
+<div class="dashboard-stats">
 
-        <li>
+<article class="dashboard-card">
 
-            <a href="https://github.com/yourusername">
+<h3>CGPA</h3>
 
-                GitHub
+<p class="number">7.0</p>
 
-            </a>
+</article>
 
-        </li>
+<article class="dashboard-card">
 
-        <li>
+<h3>Semester</h3>
 
-            <a href="https://linkedin.com/in/yourusername">
+<p class="number">8</p>
 
-                LinkedIn
+</article>
 
-            </a>
+<article class="dashboard-card">
 
-        </li>
+<h3>Attendance</h3>
 
-    </ul>
+<p class="number">92%</p>
 
-</section>
+</article>
 
-<section>
+<article class="dashboard-card">
 
-    <h2>Emergency Contact</h2>
+<h3>Backlogs</h3>
 
-    <p>
+<p class="number">0</p>
 
-        <strong>Name:</strong>
+</article>
 
-        Parent Name
-
-    </p>
-
-    <p>
-
-        <strong>Relationship:</strong>
-
-        Father
-
-    </p>
-
-    <p>
-
-        <strong>Phone:</strong>
-
-        9876543210
-
-    </p>
+</div>
 
 </section>
 
-<section>
+<section class="dashboard-section">
 
-    <h2>Profile Completion</h2>
+<h2>Skills</h2>
 
-    <ul>
+<div class="action-grid">
 
-        <li>✔ Personal Information Completed</li>
+<span class="action-btn">HTML</span>
 
-        <li>✔ Academic Information Completed</li>
+<span class="action-btn">CSS</span>
 
-        <li>✔ Resume Uploaded</li>
+<span class="action-btn">JavaScript</span>
 
-        <li>✔ Skills Added</li>
+<span class="action-btn">Python</span>
 
-        <li>✔ Certifications Added</li>
+<span class="action-btn">SQL</span>
 
-    </ul>
+<span class="action-btn">Git & GitHub</span>
+
+</div>
 
 </section>
 
-  </main>
+<section class="dashboard-section">
 
-  <footer>
+<h2>Placement Status</h2>
 
-    <p>
+<div class="announcement-card">
 
-        © 2026 Smart Student Career Portal
+✅ Eligible for Placement Drives
 
-    </p>
+</div>
+
+<div class="announcement-card">
+
+📄 Resume Uploaded Successfully
+
+</div>
+
+<div class="announcement-card">
+
+🎯 Next Interview: TCS Campus Drive
+
+</div>
+
+</section>
+
+<section class="dashboard-section">
+
+<h2>Resume Management</h2>
+
+<p>
+
+Upload your latest resume before applying for placement drives.
+
+</p>
+
+<br>
+
+<label for="resume">
+
+Choose Resume (PDF)
+
+</label>
+
+<input
+type="file"
+id="resume"
+accept=".pdf">
+
+<br><br>
+
+<div class="action-grid">
+
+<a href="#" class="action-btn">
+
+View Resume
+
+</a>
+
+<a href="#" class="action-btn">
+
+Replace Resume
+
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+<footer class="dashboard-footer">
+
+<p>
+
+© 2026 Smart Student Career Portal.
+All Rights Reserved.
+
+</p>
 
 </footer>
 
 </body>
-
 
 </html>

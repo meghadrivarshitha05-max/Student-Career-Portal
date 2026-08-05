@@ -1,264 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard | Smart Student Career Portal</title>
-  <link rel="stylesheet" href="../../CSS/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Smart Student Career Portal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
+
 <body>
 
-  <header>
+<header class="dashboard-header">
 
-    <h1>Student Dashboard</h1>
+    <div class="dashboard-logo">
 
-    <p>Welcome, Student</p>
+        <h1>Smart Student Career Portal</h1>
 
-    <img src="../images/profile.png" alt="Student Profile Picture" width="120" height="120">
+        <p>Student Dashboard</p>
 
+    </div>
 
-    <nav>
+    <nav class="dashboard-nav">
 
-      <a href="../index.html">Home</a>
+        <a href="../index.html">Home</a>
 
-      <a href="student-dashboard.html">Dashboard</a>
+        <a href="courses.html">Courses</a>
 
-      <a href="#">Profile</a>
+        <a href="student-portal.html">Profile</a>
 
-      <a href="#">Courses</a>
+        <a href="placement.html">Placements</a>
 
-      <a href="#">Resume</a>
-
-      <a href="#">Logout</a>
+        <a href="login.html">Logout</a>
 
     </nav>
 
-  </header>
+</header>
 
-  <main>
+<main class="dashboard-main">
 
-    <section>
+    <section class="welcome-card">
 
-    <h2>Student Summary</h2>
+        <h2>Welcome Back, Student 👋</h2>
+
+        <p>
+
+            Track your learning progress, assignments, attendance,
+            and placement opportunities from one place.
+
+        </p>
+
+    </section>
+
+    <section class="dashboard-stats">
+
+        <article class="dashboard-card">
+
+            <h3>📚 My Courses</h3>
+
+            <p class="number">08</p>
+
+        </article>
+
+        <article class="dashboard-card">
+
+            <h3>📝 Assignments</h3>
+
+            <p class="number">05</p>
+
+        </article>
+
+        <article class="dashboard-card">
+
+            <h3>📊 Attendance</h3>
+
+            <p class="number">92%</p>
+
+        </article>
+
+        <article class="dashboard-card">
+
+            <h3>💼 Placement Drives</h3>
+
+            <p class="number">04</p>
+
+        </article>
+
+    </section>
+
+    <section class="quick-actions">
+
+        <h2>Quick Actions</h2>
+
+        <div class="action-grid">
+
+            <a href="courses.html" class="action-btn">
+
+                View Courses
+
+            </a>
+
+            <a href="#" class="action-btn">
+
+                Upload Resume
+
+            </a>
+
+            <a href="student-portal.html" class="action-btn">
+
+                My Profile
+
+            </a>
+
+            <a href="placement.html" class="action-btn">
+
+                Placement Cell
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <section class="dashboard-section">
+
+        <h2>Latest Announcements</h2>
+
+        <div class="announcement-card">
+
+            📢 Semester Exams begin from <strong>15 August</strong>
+
+        </div>
+
+        <div class="announcement-card">
+
+            💼 TCS Placement Registration closes this week.
+
+        </div>
+
+        <div class="announcement-card">
+
+            🎉 Independence Day Holiday on 15 August.
+
+        </div>
+
+    </section>
+
+    <section class="dashboard-section">
+
+        <h2>Upcoming Deadlines</h2>
+
+        <table class="dashboard-table">
+
+            <tr>
+
+                <th>Task</th>
+
+                <th>Due Date</th>
+
+            </tr>
+
+            <tr>
+
+                <td>HTML Assignment</td>
+
+                <td>12 Aug</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Resume Submission</td>
+
+                <td>18 Aug</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Mock Interview</td>
+
+                <td>22 Aug</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+</main>
+
+<footer class="dashboard-footer">
 
     <p>
 
-        Welcome to the Smart Student Career Portal.
-        Here you can manage your profile, apply for placement drives,
-        upload your resume, and track interview schedules.
+        © 2026 Smart Student Career Portal. All Rights Reserved.
 
     </p>
 
-</section>
+</footer>
 
-    <section>
-
-      <h2>
-        Latest Placement Drives
-      </h2>
-
-      <table>
-
-<tr>
-
-<th>Company</th>
-
-<th>Role</th>
-
-<th>Package</th>
-
-</tr>
-
-<tr>
-
-<td>Google</td>
-
-<td>Software Engineer</td>
-
-<td>18 LPA</td>
-
-</tr>
-
-<tr>
-
-<td>Microsoft</td>
-
-<td>Software Engineer</td>
-
-<td>20 LPA</td>
-
-</tr>
-
-<tr>
-
-<td>Amazon</td>
-
-<td>SDE</td>
-
-<td>17 LPA</td>
-
-</tr>
-
-</table>
-
-    </section>
-
-    <section>
-
-    <h2>Upcoming Interview Schedule</h2>
-
-    <table>
-
-        <tr>
-
-            <th>Company</th>
-
-            <th>Date</th>
-
-            <th>Time</th>
-
-            <th>Mode</th>
-
-        </tr>
-
-        <tr>
-
-            <td>Google</td>
-
-            <td>15 Aug 2026</td>
-
-            <td>10:00 AM</td>
-
-            <td>Online</td>
-
-        </tr>
-
-        <tr>
-
-            <td>Microsoft</td>
-
-            <td>18 Aug 2026</td>
-
-            <td>2:00 PM</td>
-
-            <td>Offline</td>
-
-        </tr>
-
-    </table>
-
-</section>
-
-<section>
-
-    <h2>Placement Statistics</h2>
-
-    <ul>
-
-        <li>Total Companies Visited : 25</li>
-
-        <li>Applied Companies : 8</li>
-
-        <li>Interviews Scheduled : 2</li>
-
-        <li>Offers Received : 1</li>
-
-    </ul>
-
-</section>
-
-<section>
-
-    <h2>Recent Activities</h2>
-
-    <ol>
-
-        <li>Logged into the portal</li>
-
-        <li>Uploaded Resume</li>
-
-        <li>Applied for Google Recruitment</li>
-
-        <li>Updated Student Profile</li>
-
-    </ol>
-
-</section>
-
-<section>
-
-    <h2>Achievements</h2>
-
-    <ul>
-
-        <li>Completed Java Certification</li>
-
-        <li>Completed Front-End Development Certification</li>
-
-        <li>Participated in College Hackathon</li>
-
-    </ul>
-
-</section>
-
-    <section>
-
-      <h2>
-        Quick Menu
-      </h2>
-
-      <ul>
-
-        <li>
-
-          <a href="#">My Profile</a>
-
-        </li>
-
-        <li>
-
-          <a href="#">Courses</a>
-
-        </li>
-
-        <li>
-
-          <a href="#">Resume</a>
-
-        </li>
-
-        <li>
-
-          <a href="#">Applied Jobs</a>
-
-        </li>
-
-        <li>
-
-          <a href="#">Logout</a>
-
-        </li>
-
-      </ul>
-    </section>
-
-
-
-    <section>
-
-      <h2>
-        Notifications
-      </h2>
-
-      <ul>
-        <li>Registration Successful</li>
-        <li>Resume Uploaded Successfully</li>
-        <li>New Placement Drive Added</li>
-      </ul>
-
-    </section>
-
-  </main>
-  
 </body>
 </html>

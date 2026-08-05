@@ -1,381 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Smart Student Career Portal</title>
-  <link rel="stylesheet" href="../../CSS/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard | Smart Student Career Portal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
+
 <body>
 
-  <header>
+<header class="dashboard-header">
 
-    <h1>Admin Dashboard</h1>
+    <div class="dashboard-logo">
+        <h1>Smart Student Career Portal</h1>
+        <p>Teacher Dashboard</p>
+    </div>
 
-    <nav>
-
-        <a href="admin-dashboard.html">Dashboard</a>
-
+    <nav class="dashboard-nav">
         <a href="../index.html">Home</a>
-
+        <a href="courses.html">Courses</a>
+        <a href="#">Students</a>
         <a href="login.html">Logout</a>
-
     </nav>
 
-  </header>
+</header>
 
-  <main>
+<main class="dashboard-main">
 
-    <section>
+    <section class="welcome-card">
 
-    <h2>Welcome, Administrator!</h2>
+        <h2>Welcome, Professor 👋</h2>
+
+        <p>
+            Manage your classes, upload study materials,
+            monitor student progress, and create assignments.
+        </p>
+
+    </section>
+
+    <section class="dashboard-stats">
+
+        <article class="dashboard-card">
+            <h3>👨‍🎓 Students</h3>
+            <p class="number">180</p>
+        </article>
+
+        <article class="dashboard-card">
+            <h3>📚 Courses</h3>
+            <p class="number">06</p>
+        </article>
+
+        <article class="dashboard-card">
+            <h3>📝 Assignments</h3>
+            <p class="number">14</p>
+        </article>
+
+        <article class="dashboard-card">
+            <h3>📢 Announcements</h3>
+            <p class="number">09</p>
+        </article>
+
+    </section>
+
+    <section class="quick-actions">
+
+        <h2>Quick Actions</h2>
+
+        <div class="action-grid">
+
+            <a href="#" class="action-btn">
+                Upload Notes
+            </a>
+
+            <a href="#" class="action-btn">
+                Create Assignment
+            </a>
+
+            <a href="#" class="action-btn">
+                Mark Attendance
+            </a>
+
+            <a href="#" class="action-btn">
+                View Students
+            </a>
+
+        </div>
+
+    </section>
+
+    <section class="dashboard-section">
+
+        <h2>Recent Activities</h2>
+
+        <div class="announcement-card">
+            📄 Uploaded HTML & CSS Notes
+        </div>
+
+        <div class="announcement-card">
+            📝 Assignment 4 Published
+        </div>
+
+        <div class="announcement-card">
+            📢 Placement Orientation Scheduled
+        </div>
+
+    </section>
+
+    <section class="dashboard-section">
+
+        <h2>Today's Schedule</h2>
+
+        <table class="dashboard-table">
+
+            <tr>
+                <th>Time</th>
+                <th>Subject</th>
+                <th>Room</th>
+            </tr>
+
+            <tr>
+                <td>09:00 AM</td>
+                <td>HTML & CSS</td>
+                <td>Lab-2</td>
+            </tr>
+
+            <tr>
+                <td>11:00 AM</td>
+                <td>JavaScript</td>
+                <td>Room-301</td>
+            </tr>
+
+            <tr>
+                <td>02:00 PM</td>
+                <td>Placement Training</td>
+                <td>Seminar Hall</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+</main>
+
+<footer class="dashboard-footer">
 
     <p>
 
-        Monitor and manage students, teachers, courses, placements, and portal activities.
-
-    </p>
-
-</section>
-
-<section>
-
-    <h2>Quick Actions</h2>
-
-    <ul>
-
-        <li>Add Student</li>
-
-        <li>Add Teacher</li>
-
-        <li>Add Course</li>
-
-        <li>Manage Placements</li>
-
-        <li>Generate Reports</li>
-
-    </ul>
-
-</section>
-
-<section>
-
-    <h2>Portal Overview</h2>
-
-    <table>
-
-        <tr>
-
-            <th>Category</th>
-
-            <th>Total</th>
-
-        </tr>
-
-        <tr>
-
-            <td>Students</td>
-
-            <td>620</td>
-
-        </tr>
-
-        <tr>
-
-            <td>Teachers</td>
-
-            <td>48</td>
-
-        </tr>
-
-        <tr>
-
-            <td>Courses</td>
-
-            <td>24</td>
-
-        </tr>
-
-        <tr>
-
-            <td>Placement Drives</td>
-
-            <td>12</td>
-
-        </tr>
-
-        <tr>
-
-          <td>Announcements</td>
-
-          <td>18</td>
-
-        </tr>
-
-        
-
-    </table>
-
-</section>
-
-<section>
-
-    <h2>Recent Activities</h2>
-
-    <ul>
-
-        <li>New student registered.</li>
-
-        <li>Teacher uploaded assignments.</li>
-
-        <li>Google placement drive added.</li>
-
-        <li>Course updated successfully.</li>
-
-    </ul>
-
-</section>
-
-<section>
-
-    <h2>Student Management</h2>
-
-    <table>
-
-        <tr>
-            <th>Roll No</th>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Status</th>
-        </tr>
-
-        <tr>
-            <td>101</td>
-            <td>Rahul Sharma</td>
-            <td>CSE</td>
-            <td>Active</td>
-        </tr>
-
-        <tr>
-            <td>102</td>
-            <td>Priya Singh</td>
-            <td>ECE</td>
-            <td>Active</td>
-        </tr>
-
-        <tr>
-            <td>103</td>
-            <td>Arjun Patel</td>
-            <td>IT</td>
-            <td>Inactive</td>
-        </tr>
-
-    </table>
-
-</section>
-
-<section>
-
-<h2>Teacher Management</h2>
-
-<table>
-
-<tr>
-
-<th>ID</th>
-
-<th>Name</th>
-
-<th>Department</th>
-
-<th>Status</th>
-
-</tr>
-
-<tr>
-
-<td>T101</td>
-
-<td>Dr. Anjali Sharma</td>
-
-<td>CSE</td>
-
-<td>Active</td>
-
-</tr>
-
-<tr>
-
-<td>T102</td>
-
-<td>Dr. Ramesh Kumar</td>
-
-<td>ECE</td>
-
-<td>Active</td>
-
-</tr>
-
-</table>
-
-</section>
-
-<section>
-
-<h2>Course Management</h2>
-
-<table>
-
-<tr>
-
-<th>Course</th>
-
-<th>Instructor</th>
-
-<th>Semester</th>
-
-</tr>
-
-<tr>
-
-<td>HTML & CSS</td>
-
-<td>Dr. Anjali Sharma</td>
-
-<td>5th</td>
-
-</tr>
-
-<tr>
-
-<td>Java</td>
-
-<td>Dr. Ramesh Kumar</td>
-
-<td>5th</td>
-
-</tr>
-
-<tr>
-
-<td>SQL</td>
-
-<td>Dr. Kavitha</td>
-
-<td>6th</td>
-
-</tr>
-
-</table>
-
-</section>
-
-<section>
-
-<h2>Reports</h2>
-
-<ul>
-
-<li>Total Students : 620</li>
-
-<li>Total Teachers : 48</li>
-
-<li>Courses Offered : 24</li>
-
-<li>Placement Rate : 91%</li>
-
-</ul>
-
-</section>
-
-<section>
-
-<h2>Portal Settings</h2>
-
-<ul>
-
-<li>Update Academic Year</li>
-
-<li>Manage Departments</li>
-
-<li>Backup Database</li>
-
-<li>Change Portal Banner</li>
-
-<li>Manage User Roles</li>
-
-</ul>
-
-</section>
-
-<section>
-
-<h2>Admin FAQs</h2>
-
-<details>
-
-<summary>
-
-How do I add a new teacher?
-
-</summary>
-
-<p>
-
-Go to Teacher Management and add the teacher's details.
-
-</p>
-
-</details>
-
-<details>
-
-<summary>
-
-How can I create a new course?
-
-</summary>
-
-<p>
-
-Open Course Management and add the course information.
-
-</p>
-
-</details>
-
-<details>
-
-<summary>
-
-How do I generate reports?
-
-</summary>
-
-<p>
-
-Open the Reports section and choose the required report.
-
-</p>
-
-</details>
-
-</section>
-
-
-  </main>
-
-  <hr>
-
-  <footer>
-
-    <p>
-
-        &copy; 2026 Smart Student Career Portal
+        © 2026 Smart Student Career Portal.
+        All Rights Reserved.
 
     </p>
 
 </footer>
-  
+
 </body>
 </html>

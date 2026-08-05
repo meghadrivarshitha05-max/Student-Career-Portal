@@ -1,347 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register | Smart Student Career Portal</title>
-  <link rel="stylesheet" href="../../CSS/style.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Smart Student Career Portal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
 </head>
+
 <body>
 
-  <header>
+<div class="register-container">
 
-    <h1>Smart Student Career Portal</h1>
+    <div class="register-card">
 
-  </header> 
-  
-  <main>
+        <h1>Smart Student Career Portal</h1>
 
-    <section>
+        <h2>Create Account</h2>
 
-      <h2>Creat Your Account</h2>
+        <p>
 
-      <p>
-        Fill in the details below to register.
-      </p>
+            Register to begin your learning and placement journey.
 
-    </section>
+        </p>
 
-    <form action="#" method="post">
+        <form>
 
-      <fieldset>
+            <label for="fullname">
 
-        <legend>Personal Information</legend>
+                Full Name
 
-        <br>
+            </label>
 
-        <label for="photo">
+            <input
+                type="text"
+                id="fullname"
+                placeholder="Enter your full name"
+                required>
 
-          Upload Profile Photo
+            <label for="email">
 
-        </label>
+                Email Address
 
-         <input
-           type="file"
-           id="photo"
-           name="photo"
-           accept="image/*">
+            </label>
 
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required>
 
-        <br><br>
+            <label for="phone">
 
-         <label for="fullname">Full Name:</label>
+                Phone Number
 
-        <input type="text" id="fullname" name="fullname" placeholder="Enter you Full Name" autocomplete="name" required>
+            </label>
 
-       <br><br>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                required>
 
-       <label for="email">Email Adress:</label>
+            <label for="role">
 
-        <input type="email" id="email" name="email" placeholder="Enter you Email" autocomplete="email" required>
+                Role
 
-        <br><br>
+            </label>
 
-         <label for="phone">Phone Number:</label>
+            <select id="role" required>
 
-        <input type="tel" id="phone" name="phone" placeholder="Enter you Phone Number:" autocomplete="tel" required>
+                <option value="">
 
-        <br><br>
+                    Select your role
 
-        <label for="dob">Date of Birth:</label>
+                </option>
 
-       <input
-type="date"
-id="dob"
-name="dob"
-autocomplete="bday"
-required>
-        
-      </fieldset>
+                <option>
 
-      <br>
+                    Student
 
-      <fieldset>
+                </option>
 
-        <legend>Gender</legend>
+                <option>
 
-        <input type="radio" id="male" name="gender" value="male">
+                    Teacher
 
-        <label for="male">Male</label>
-     
-        <br><br>
+                </option>
 
-        <input type="radio" id="female" name="gender" value="female">
-        
-        <label for="female">Female</label>
+                <option>
 
-        <br><br>
+                    Administrator
 
-         <input type="radio" id="others" name="gender" value="others">
+                </option>
 
-        <label for="others">Others</label> 
+            </select>
 
-      </fieldset>
+            <label for="password">
 
-      <br>
+                Password
 
-      <fieldset>
+            </label>
 
-        <legend>Academic Imformation</legend>
-        
-        <label for="college">College Name</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                required>
 
-        <input type="text" id="college" name="college" placeholder="Enter your college name" required>
+            <label for="confirm-password">
 
-        <br><br>
-        
-        <label for="branch">Branch</label>
+                Confirm Password
 
-        <select id="branch" name="brach"  required>
+            </label>
 
-         <option value="">Select your branch</option>
+            <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm your password"
+                required>
 
-          <option value="cse">Computer Science Engineering</option>
+            <div class="terms">
 
-          <option value="IT">Information Technology</option>
+                <label>
 
-          <option value="ece">Electronics and Communication</option>
+                    <input
+                        type="checkbox"
+                        required>
 
-          <option value="eee">Electrical and Electronics</option>
+                    I agree to the Terms & Conditions
 
-          <option value="mech">Mechanical Engineering</option>
+                </label>
 
-          <optgroup label="Management">
+            </div>
 
-            <option>MBA</option>
+            <button type="submit">
 
-            <option>MTECH</option>
+                Register
 
-            <option>BBA</option>
+            </button>
 
-          </optgroup>
-            
-        </select>
+        </form>
 
-        
+        <p class="register-link">
 
-        <br><br>
+            Already have an account?
 
-        <label for="year">Year of Study</label>
+            <a href="login.html">
 
-        <select id="year" name="year" required>
+                Login
 
-          <option value="">Select year</option>
+            </a>
 
-          <option value="2023">2023</option>
+        </p>
 
-          <option value="2024">2024</option>
+        <p class="register-link">
 
-          <option value="2025">2025</option>
+            <a href="../index.html">
 
-          <option value="2026">2026</option>
+                ← Back to Home
 
-        </select>
+            </a>
 
-        <br><br>
+        </p>
 
-        <label for="rollnumber">Roll Number</label>
+    </div>
 
-        <input type="text" id="rollnumber" placeholder="Enter your roll number" required>
-
-      </fieldset>
-
-      <br>
-
-      <label for="resume">
-        Upload resume:
-      </label>
-
-      <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-
-      <br><br>
-
-      <fieldset>
-
-        <legend>Account Information</legend>
-
-         <label for="password">Password</label>
-
-         <input type="password" id="password" name="password" placeholder="Create a password" minlength="8" required>
-
-         <br><br>
-
-         <label for="confirmPassword">Confirm Password</label>
-
-         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your Password" minlength="8" required>
-
-         <p>
-          Password must contain at least 8 characters.
-         </p>
-
-      </fieldset>
-
-      <br>
-
-      <fieldset>
-
-        <legend>Career Information</legend>
-
-        <label>Skills:</label>
-
-        <br><br>
-
-        <input type="checkbox" id="html" name="skills" value="HTML">
-
-        <label for="html">HTML</label>
-
-        <br><br>
-
-        
-        <input type="checkbox" id="css" name="skills" value="CSS">
-
-        <label for="css">CSS</label>
-
-        <br><br>
-
-        
-        <input type="checkbox" id="python" name="skills" value="PYTHON">
-
-        <label for="python">PYTHON</label>
-
-        <br><br>
-
-        
-        <input type="checkbox" id="java" name="skills" value="JAVA">
-
-        <label for="java">JAVA</label>
-
-        <br><br>
-
-        <input type="checkbox" id="sql" name="skills" value="SQL">
-
-        <label for="sql">SQL</label>
-
-        <br><br>
-   
-        <input type="checkbox" id="javascript" name="skills" value="JS">
-
-        <label for="javascript">JS</label>
-
-        <br><br>
-
-        <fieldset>
-          
-          <legend>Add Skills</legend>
-
-            <label for="additionalSkills"></label>
-
-          <textarea id="additionalSkills" name="additionalSkills" rows="5" cols="40" placeholder="Add extra skills you have...">
-          </textarea>     
-
-        </fieldset>
-
-        <br><br>
-
-        <fieldset>
-
-          <legend>Adress</legend>
-
-          <label for="address">
-          </label>
-
-          <textarea id="address" name="address" rows="4" placeholder="Enter your complete address">
-          </textarea>
-
-        </fieldset>
-
-        <br><br>
-
-        <fieldset>
-
-    <legend>Terms & Conditions</legend>
-
-    <input
-        type="checkbox"
-        id="terms"
-        name="terms"
-        required>
-
-    <label for="terms">
-
-        I agree to the Terms & Conditions
-
-    </label>
-
-    <br><br>
-
-    <button type="submit">
-
-    Register
-
-</button>
-
-        </fieldset>
-
-
-      </fieldset>
-    
-    <p>
-
-      Already have an account?
-
-    <a href="login.html">
-
-        Login Here
-
-    </a>
-
-    </p>
-  
-    
-
-  <p>
-
-    <a href="../index.html">
-
-        ← Back to Home
-
-    </a>
-
-  </p>
-    
-
-
-    </form>
-
-  </main>
-
-  <footer>
-
-    <p> &copy; 2026 Smart Student Career Portal </p>
-
-  </footer>
+</div>
 
 </body>
-
 
 </html>

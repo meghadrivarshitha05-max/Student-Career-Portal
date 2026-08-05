@@ -1,137 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | Smart Student Career Portal</title>
-  <link rel="stylesheet" href="../../CSS/style.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Smart Student Career Portal</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
 </head>
+
 <body>
 
-  <header>
+<div class="login-container">
 
-    <h1>Smart Student Career Portal</h1>
+    <div class="login-card">
 
-  </header>
+        <h1>Smart Student Career Portal</h1>
 
-  <main>
+        <h2>Welcome Back!</h2>
 
-    <section>
+        <p>
+            Login to continue your learning journey.
+        </p>
 
-      <h2>Welcome Back!</h2>
+        <form>
 
-      <P>
-        Please log in to continue
-      </P>
-
-      <form action="#" method="post">
-
-        <fieldset>
-
-          <legend>
-
-            Login As:
-
-          </legend>
-
-            <input type="radio" id="student" name="role" value="student">
-
-            <label for="student">Student</label>
-            
-            <br>
-
-             <input type="radio"
-                    id="teacher"
-                    name="role"
-                    value="teacher">
-              
-
-            <label for="teacher">
-
-                    Teacher
-
-            </label>
-            
-            <br>
-
-              <input
-                type="radio"
-                id="admin"
-                name="role"
-                value="admin">
-
-            <label for="admin">
-
-                Admin
-
+            <label for="login-email">
+                Email Address
             </label>
 
-          
-        </fieldset>
+            <input
+                type="email"
+                id="login-email"
+                placeholder="Enter your email"
+                required>
 
-        <br>
+            <label for="login-password">
+                Password
+            </label>
 
-        <label for="email">Email Adress<span>*:</span></label>
+            <input
+                type="password"
+                id="login-password"
+                placeholder="Enter your password"
+                required>
 
-        <input type="email" id="email" name="email" placeholder="Enater your email" required>
+            <div class="login-options">
 
-        <br><br>
+                <label>
 
-        <label for="password">Password<span>*:</span></label>
+                    <input type="checkbox">
 
-        <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+                    Remember Me
 
-        <br><br>
+                </label>
 
-        <input type="checkbox" id="remember" name="remember">
+                <a href="#">
 
-        <label for="remember">Remember me</label>
+                    Forgot Password?
 
-        <br><br>
+                </a>
 
-        <button type="submit">
-          Login
-        </button>
+            </div>
 
-        <p>
+            <button type="submit">
 
-          <a href="forgot-password.html">Forgot Password?</a>
+                Login
+
+            </button>
+
+        </form>
+
+        <p class="register-link">
+
+            Don't have an account?
+
+            <a href="register.html">
+
+                Register
+
+            </a>
 
         </p>
 
-        <p>
+        <p class="register-link">
 
-          Don't have an account?
+            <a href="../index.html">
 
-          <a href="register.html">Create an Account</a>
+                ← Back to Home
+
+            </a>
 
         </p>
 
-        <p>
+    </div>
 
-          <a href="../index.html">Back to Home</a>
-        </p>
+</div>
 
-
-      </form>
-
-    </section>
-    
-    
-
-  </main>
-
-  <hr>
-
-  <footer>
-
-    <p>
-
-      &copy; 2026 Smart Student Career Portal
-
-    </p>
-    
-  </footer>
-  
 </body>
+
 </html>
