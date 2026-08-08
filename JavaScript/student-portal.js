@@ -352,3 +352,174 @@ if (savedTheme === "dark") {
     }
 
 }
+
+// ==========================================
+// RESUME MANAGEMENT
+// ==========================================
+
+const resumeInput =
+    document.getElementById("resume");
+
+
+if (resumeInput) {
+
+    resumeInput.addEventListener("change", function () {
+
+        const file =
+            resumeInput.files[0];
+
+
+        if (!file) {
+            return;
+        }
+
+
+        // Check PDF
+        if (file.type !== "application/pdf") {
+
+            alert(
+                "Please select a PDF file only."
+            );
+
+            resumeInput.value = "";
+
+            return;
+
+        }
+
+
+        // Save resume filename
+        localStorage.setItem(
+            "resumeName",
+            file.name
+        );
+
+
+        alert(
+            "Resume uploaded successfully!\n\n" +
+            file.name
+        );
+
+    });
+
+}
+
+
+// ==========================================
+// LOAD SAVED RESUME
+// ==========================================
+
+const savedResume =
+    localStorage.getItem("resumeName");
+
+
+if (savedResume && resumeInput) {
+
+    const resumeMessage =
+        document.createElement("p");
+
+    resumeMessage.textContent =
+        "📄 Current Resume: " + savedResume;
+
+    resumeMessage.style.fontWeight =
+        "bold";
+
+    resumeInput.parentNode.insertBefore(
+        resumeMessage,
+        resumeInput.nextSibling
+    );
+
+}
+
+// ==========================================
+// VIEW RESUME
+// ==========================================
+
+const viewResumeBtn =
+    document.getElementById("viewResumeBtn");
+
+if (viewResumeBtn) {
+
+    viewResumeBtn.addEventListener("click", function () {
+
+        const savedResume =
+            localStorage.getItem("resumeName");
+
+        if (!savedResume) {
+
+            alert(
+                "No resume has been uploaded yet."
+            );
+
+            return;
+
+        }
+
+        alert(
+            "Current Resume:\n\n" +
+            savedResume
+        );
+
+    });
+
+}
+
+
+// ==========================================
+// REPLACE RESUME
+// ==========================================
+
+const replaceResumeBtn =
+    document.getElementById("replaceResumeBtn");
+
+if (replaceResumeBtn) {
+
+    replaceResumeBtn.addEventListener("click", function () {
+
+        if (resumeInput) {
+
+            resumeInput.click();
+
+        }
+
+    });
+
+}
+
+// ==========================================
+// NOTIFICATIONS
+// ==========================================
+
+const notificationList =
+    document.getElementById("notificationList");
+
+if (notificationList) {
+
+    const notifications = [
+
+        "📢 TCS Placement Registration closes this week.",
+
+        "🎓 New course: JavaScript is now available.",
+
+        "📄 Please keep your latest resume updated.",
+
+        "💼 New placement drives are available."
+
+    ];
+
+
+    notifications.forEach(function (notification) {
+
+        const listItem =
+            document.createElement("li");
+
+        listItem.textContent =
+            notification;
+
+        notificationList.appendChild(
+            listItem
+        );
+
+    });
+
+}

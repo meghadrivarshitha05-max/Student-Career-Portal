@@ -166,3 +166,41 @@ if (enrolledCourse) {
 
 }
 
+// ==========================================
+// PLACEMENT APPLICATION
+// ==========================================
+
+const placementApplication =
+    document.getElementById("placementApplication");
+
+if (placementApplication) {
+
+    const savedApplication =
+        localStorage.getItem("placementApplication");
+
+    if (savedApplication) {
+
+        try {
+
+            const application =
+                JSON.parse(savedApplication);
+
+            placementApplication.textContent =
+                "💼 Applied for " +
+                application.role +
+                " at " +
+                application.company +
+                " on " +
+                application.date;
+
+        } catch (error) {
+
+            console.log(
+                "Unable to load placement application."
+            );
+
+        }
+
+    }
+
+}
