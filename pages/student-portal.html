@@ -35,6 +35,10 @@
 
         <a href="login.html">Logout</a>
 
+        <button id="themeToggle" class="action-btn" type="button">
+    🌙 Dark Mode
+        </button>
+
     </nav>
 
 </header>
@@ -43,7 +47,17 @@
 
 <section class="welcome-card">
 
-<h2>Student Profile 👨‍🎓</h2>
+<h2 id="welcomeHeading">
+    Welcome, Student!
+</h2>
+
+<div class="dashboard-date-time">
+
+    <p id="currentDate"></p>
+
+    <p id="currentTime"></p>
+
+</div>
 
 <p>
 
@@ -61,12 +75,19 @@ View your academic details, skills, placement status and resume.
 
 <tr>
 
-<th>Name</th>
+    <th>Name</th>
 
-<td>Meghadri Varshitha</td>
+    <td>
+
+        <input
+            type="text"
+            id="profileName"
+            value="Meghadri Varshitha"
+            disabled>
+
+    </td>
 
 </tr>
-
 <tr>
 
 <th>Roll Number</th>
@@ -102,6 +123,18 @@ View your academic details, skills, placement status and resume.
 </table>
 
 </section>
+
+<div class="action-grid">
+
+    <button id="editProfileBtn" class="action-btn">
+        ✏ Edit Profile
+    </button>
+
+    <button id="saveProfileBtn" class="action-btn">
+        💾 Save Profile
+    </button>
+
+</div>
 
 <section class="dashboard-section">
 
@@ -210,27 +243,37 @@ Choose Resume (PDF)
 </label>
 
 <input
-type="file"
-id="resume"
-accept=".pdf">
+    type="file"
+    id="resume"
+    accept=".pdf,application/pdf">
 
-<br><br>
+<p id="resumeStatus"></p>
 
-<div class="action-grid">
+<button
+    type="button"
+    id="viewResumeBtn"
+    class="action-btn">
+    👁 View Resume
+</button>
 
-<a href="#" class="action-btn">
-
-View Resume
-
-</a>
-
-<a href="#" class="action-btn">
-
-Replace Resume
-
-</a>
+<button
+    type="button"
+    id="replaceResumeBtn"
+    class="action-btn">
+    🔄 Replace Resume
+</button>
 
 </div>
+
+</section>
+
+<section class="dashboard-card">
+
+    <h2>🔔 Notifications</h2>
+
+    <ul id="notificationList">
+
+    </ul>
 
 </section>
 
@@ -246,6 +289,8 @@ All Rights Reserved.
 </p>
 
 </footer>
+
+<script src="../JavaScript/student-portal.js"></script>
 
 </body>
 

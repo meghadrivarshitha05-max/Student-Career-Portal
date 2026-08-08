@@ -30,23 +30,11 @@
 
         </p>
 
-        <form>
+        <form id="registerForm" action="#" method="post">
 
             <label for="fullname">
 
                 Full Name
-
-            </label>
-
-            <input
-                type="text"
-                id="fullname"
-                placeholder="Enter your full name"
-                required>
-
-            <label for="email">
-
-                Email Address
 
             </label>
 
@@ -102,29 +90,47 @@
 
             </select>
 
-            <label for="password">
+            <label for="password">Password</label>
 
-                Password
+<div class="password-container">
 
-            </label>
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Create a password"
+minlength="8"
+required>
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Create a password"
-                required>
+<span id="togglePassword1" class="eye-icon">
 
-            <label for="confirm-password">
+👁️
 
-                Confirm Password
+</span>
 
-            </label>
+</div>
 
-            <input
-                type="password"
-                id="confirm-password"
-                placeholder="Confirm your password"
-                required>
+            <label for="confirmPassword">Confirm Password</label>
+
+<div class="password-container">
+
+<input
+type="password"
+id="confirmPassword"
+name="confirmPassword"
+placeholder="Re-enter your Password"
+minlength="8"
+required>
+
+<span id="togglePassword2" class="eye-icon">
+
+👁️
+
+</span>
+
+</div>
+
+            <p id="passwordMessage"></p>
 
             <div class="terms">
 
@@ -173,6 +179,8 @@
     </div>
 
 </div>
+
+<script src="../JavaScript/register.js"></script>
 
 </body>
 

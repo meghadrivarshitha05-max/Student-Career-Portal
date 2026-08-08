@@ -27,7 +27,7 @@
             Login to continue your learning journey.
         </p>
 
-        <form>
+        <form id="loginForm">
 
             <label for="login-email">
                 Email Address
@@ -43,11 +43,25 @@
                 Password
             </label>
 
-            <input
-                type="password"
-                id="login-password"
-                placeholder="Enter your password"
-                required>
+            <div class="password-container">
+
+<input
+type="password"
+id="login-password"
+placeholder="Enter your password"
+required>
+
+<span id="togglePassword" class="eye-icon">
+
+👁️
+
+</span>
+
+</div>
+
+<p id="passwordStrength"></p>
+
+           
 
             <div class="login-options">
 
@@ -67,11 +81,13 @@
 
             </div>
 
-            <button type="submit">
+            <button type="submit" id="loginBtn">
 
                 Login
 
-            </button>
+             </button>
+
+             <p id="loginMessage"></p>
 
         </form>
 
@@ -100,6 +116,8 @@
     </div>
 
 </div>
+
+<script src="../JavaScript/login.js"></script>
 
 </body>
 
