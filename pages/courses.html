@@ -80,11 +80,9 @@ Dr. Anjali Sharma
 
 </p>
 
-<a href="#" class="action-btn">
-
-View Course
-
-</a>
+<button id="htmlCssBtn" class="action-btn" type="button">
+    View Course
+</button>
 
 </article>
 
@@ -112,11 +110,9 @@ Dr. Ramesh Kumar
 
 </p>
 
-<a href="#" class="action-btn">
-
-View Course
-
-</a>
+<button id="javascriptBtn" class="action-btn" type="button">
+    View Course
+</button>
 
 </article>
 
@@ -144,11 +140,9 @@ Dr. Kavitha
 
 </p>
 
-<a href="#" class="action-btn">
-
-View Course
-
-</a>
+<button id="pythonBtn" class="action-btn" type="button">
+    View Course
+</button>
 
 </article>
 
@@ -176,11 +170,9 @@ Dr. Rajesh
 
 </p>
 
-<a href="#" class="action-btn">
-
-View Course
-
-</a>
+<button id="sqlBtn" class="action-btn" type="button">
+    View Course
+</button>
 
 </article>
 
@@ -208,11 +200,9 @@ Mr. Suresh
 
 </p>
 
-<a href="#" class="action-btn">
-
-View Course
-
-</a>
+<button id="gitBtn" class="action-btn" type="button">
+    View Course
+</button>
 
 </article>
 
@@ -250,6 +240,42 @@ View Course
 
 </section>
 
+<section class="dashboard-section">
+
+    <h2>🎓 My Enrolled Course</h2>
+
+    <div class="announcement-card" id="enrolledCourse">
+
+        You have not enrolled in any course yet.
+
+    </div>
+
+</section>
+
+<section
+    class="dashboard-section"
+    id="courseDetails"
+    style="display: none;">
+
+    <h2 id="courseTitle"></h2>
+
+    <p id="courseDescription"></p>
+
+    <p id="courseInstructor"></p>
+
+    <p id="courseDuration"></p>
+
+    <button
+        id="enrollBtn"
+        class="action-btn"
+        type="button">
+
+        🎓 Enroll in Course
+
+    </button>
+
+</section>
+
 </main>
 
 <footer class="dashboard-footer">
@@ -262,8 +288,7 @@ All Rights Reserved.
 </p>
 
 </footer>
-
-<script src="../JavaScript/script.js"></script>
+<script src="../JavaScript/course.js"></script>
 </body>
 
 </html>

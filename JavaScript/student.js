@@ -144,3 +144,25 @@ if (logoutBtn) {
 
 }
 
+// ==========================================
+// ENROLLED COURSE
+// ==========================================
+
+const enrolledCourse =
+    document.getElementById("enrolledCourse");
+
+if (enrolledCourse) {
+
+    const selectedCourse =
+        localStorage.getItem("selectedCourse");
+
+    if (selectedCourse) {
+
+        enrolledCourse.textContent =
+            "🎓 Currently Enrolled: " +
+            selectedCourse;
+
+    }
+
+}
+
