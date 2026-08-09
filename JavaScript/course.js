@@ -194,9 +194,38 @@ if (enrollBtn) {
         }
 
 
+        // Get existing enrolled courses
+
+        let enrolledCourses =
+            JSON.parse(
+                localStorage.getItem("enrolledCourses")
+            ) || [];
+
+
+        // Check if already enrolled
+
+        if (enrolledCourses.includes(selectedCourse)) {
+
+            alert(
+                "You are already enrolled in " +
+                selectedCourse + "."
+            );
+
+            return;
+
+        }
+
+
+        // Add new course
+
+        enrolledCourses.push(selectedCourse);
+
+
+        // Save updated course list
+
         localStorage.setItem(
-            "selectedCourse",
-            selectedCourse
+            "enrolledCourses",
+            JSON.stringify(enrolledCourses)
         );
 
 
@@ -208,6 +237,3 @@ if (enrollBtn) {
     });
 
 }
-
-
-console.log("Courses JavaScript Ready");

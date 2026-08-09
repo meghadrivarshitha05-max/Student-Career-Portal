@@ -123,6 +123,7 @@ if (loginForm) {
 
         message.textContent = "✅ Login Successful!";
         message.style.color = "green";
+        localStorage.setItem("isLoggedIn", "true");
 
     });
 

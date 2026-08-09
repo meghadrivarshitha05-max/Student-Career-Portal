@@ -1,56 +1,73 @@
-// ===========================
+// ==========================================
 // STUDENT DASHBOARD
-// ===========================
+// ==========================================
 
 console.log("Student Dashboard Loaded");
 
 const studentName = "Varshitha";
 
-const welcomeHeading = document.getElementById("welcomeHeading");
+const welcomeHeading =
+    document.getElementById("welcomeHeading");
 
 if (welcomeHeading) {
-    welcomeHeading.textContent = `Welcome, ${studentName}!`;
+
+    welcomeHeading.textContent =
+        `Welcome Back, ${studentName} 👋`;
+
 }
 
-// ===========================
-// LIVE DATE & TIME
-// ===========================
 
-const currentDate = document.getElementById("currentDate");
-const currentTime = document.getElementById("currentTime");
+// ==========================================
+// LIVE DATE & TIME
+// ==========================================
+
+const currentDate =
+    document.getElementById("currentDate");
+
+const currentTime =
+    document.getElementById("currentTime");
+
 
 function updateDateTime() {
 
     const now = new Date();
 
+
     if (currentDate) {
 
         currentDate.textContent =
-            "📅 " + now.toLocaleDateString("en-US", {
+            "📅 " +
+            now.toLocaleDateString("en-US", {
+
                 weekday: "long",
                 year: "numeric",
                 month: "long",
                 day: "numeric"
+
             });
 
     }
 
+
     if (currentTime) {
 
         currentTime.textContent =
-            "🕒 " + now.toLocaleTimeString();
+            "🕒 " +
+            now.toLocaleTimeString();
 
     }
 
 }
 
+
 updateDateTime();
 
 setInterval(updateDateTime, 1000);
 
-// ===========================
+
+// ==========================================
 // NOTIFICATIONS
-// ===========================
+// ==========================================
 
 const notifications = [
 
@@ -64,15 +81,22 @@ const notifications = [
 
 ];
 
-const notificationList = document.getElementById("notificationList");
+
+const notificationList =
+    document.getElementById("notificationList");
+
 
 if (notificationList) {
 
-    notifications.forEach(function(notification) {
+    notificationList.innerHTML = "";
 
-        const li = document.createElement("li");
+    notifications.forEach(function (notification) {
 
-        li.textContent = notification;
+        const li =
+            document.createElement("li");
+
+        li.textContent =
+            notification;
 
         notificationList.appendChild(li);
 
@@ -80,91 +104,53 @@ if (notificationList) {
 
 }
 
-// ==========================================
-// STUDENT DASHBOARD QUICK ACTIONS
-// ==========================================
-
-const profileBtn = document.getElementById("profileBtn");
-const courseBtn = document.getElementById("courseBtn");
-const placementBtn = document.getElementById("placementBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-
-
-// My Profile
-if (profileBtn) {
-
-    profileBtn.addEventListener("click", function () {
-
-        window.location.href = "student-portal.html";
-
-    });
-
-}
-
-
-// Courses
-if (courseBtn) {
-
-    courseBtn.addEventListener("click", function () {
-
-        window.location.href = "courses.html";
-
-    });
-
-}
-
-
-// Placements
-if (placementBtn) {
-
-    placementBtn.addEventListener("click", function () {
-
-        window.location.href = "placement.html";
-
-    });
-
-}
-
-
-// Logout
-if (logoutBtn) {
-
-    logoutBtn.addEventListener("click", function () {
-
-        const confirmLogout =
-            confirm("Are you sure you want to logout?");
-
-        if (confirmLogout) {
-
-            window.location.href = "login.html";
-
-        }
-
-    });
-
-}
 
 // ==========================================
-// ENROLLED COURSE
+// ENROLLED COURSES
 // ==========================================
 
 const enrolledCourse =
     document.getElementById("enrolledCourse");
 
+
 if (enrolledCourse) {
 
-    const selectedCourse =
-        localStorage.getItem("selectedCourse");
+    const enrolledCourses =
+        JSON.parse(
+            localStorage.getItem("enrolledCourses")
+        ) || [];
 
-    if (selectedCourse) {
+
+    if (enrolledCourses.length === 0) {
 
         enrolledCourse.textContent =
-            "🎓 Currently Enrolled: " +
-            selectedCourse;
+            "You have not enrolled in any course yet.";
+
+    }
+
+    else {
+
+        enrolledCourse.innerHTML = "";
+
+
+        enrolledCourses.forEach(function (course) {
+
+            const courseItem =
+                document.createElement("p");
+
+            courseItem.textContent =
+                "🎓 " + course;
+
+            enrolledCourse.appendChild(
+                courseItem
+            );
+
+        });
 
     }
 
 }
+
 
 // ==========================================
 // PLACEMENT APPLICATION
@@ -173,10 +159,12 @@ if (enrolledCourse) {
 const placementApplication =
     document.getElementById("placementApplication");
 
+
 if (placementApplication) {
 
     const savedApplication =
         localStorage.getItem("placementApplication");
+
 
     if (savedApplication) {
 
@@ -184,6 +172,7 @@ if (placementApplication) {
 
             const application =
                 JSON.parse(savedApplication);
+
 
             placementApplication.textContent =
                 "💼 Applied for " +
@@ -193,7 +182,9 @@ if (placementApplication) {
                 " on " +
                 application.date;
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
             console.log(
                 "Unable to load placement application."
@@ -204,3 +195,160 @@ if (placementApplication) {
     }
 
 }
+
+
+// ==========================================
+// QUICK ACTION BUTTONS
+// ==========================================
+
+const profileBtn =
+    document.getElementById("profileBtn");
+
+const courseBtn =
+    document.getElementById("courseBtn");
+
+const placementBtn =
+    document.getElementById("placementBtn");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+// My Profile
+
+if (profileBtn) {
+
+    profileBtn.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "student-portal.html";
+
+        }
+    );
+
+}
+
+
+// Courses
+
+if (courseBtn) {
+
+    courseBtn.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "courses.html";
+
+        }
+    );
+
+}
+
+
+// Placements
+
+if (placementBtn) {
+
+    placementBtn.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "placement.html";
+
+        }
+    );
+
+}
+
+
+// Logout
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+        "click",
+        function () {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (confirmLogout) {
+
+                localStorage.removeItem(
+                    "isLoggedIn"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// DYNAMIC COURSE COUNT
+// ==========================================
+
+const courseCount =
+    document.getElementById("courseCount");
+
+
+if (courseCount) {
+
+    const enrolledCourses =
+        JSON.parse(
+            localStorage.getItem("enrolledCourses")
+        ) || [];
+
+
+    courseCount.textContent =
+        enrolledCourses.length
+            .toString()
+            .padStart(2, "0");
+
+}
+
+
+// ==========================================
+// DYNAMIC PLACEMENT APPLICATION COUNT
+// ==========================================
+
+const placementCount =
+    document.getElementById("placementCount");
+
+
+if (placementCount) {
+
+    const savedApplication =
+        localStorage.getItem(
+            "placementApplication"
+        );
+
+
+    if (savedApplication) {
+
+        placementCount.textContent = "01";
+
+    }
+
+    else {
+
+        placementCount.textContent = "00";
+
+    }
+
+}
+
+
+console.log("Student Dashboard JavaScript Ready");
