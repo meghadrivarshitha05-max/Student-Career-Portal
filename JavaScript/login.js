@@ -81,26 +81,45 @@ if (loginForm) {
 
         event.preventDefault();
 
-        const email = document.getElementById("login-email");
-        const message = document.getElementById("loginMessage");
+        const email =
+            document.getElementById("login-email");
+
+        const message =
+            document.getElementById("loginMessage");
+
 
         email.style.border = "";
         loginPassword.style.border = "";
 
-        if (email.value.trim() === "" || loginPassword.value.trim() === "") {
 
-            message.textContent = "Please fill all fields.";
-            message.style.color = "red";
+        // Check empty fields
+
+        if (
+            email.value.trim() === "" ||
+            loginPassword.value.trim() === ""
+        ) {
+
+            message.textContent =
+                "Please fill all fields.";
+
+            message.style.color =
+                "red";
+
 
             if (email.value.trim() === "") {
 
-                email.style.border = "2px solid red";
+                email.style.border =
+                    "2px solid red";
 
             }
 
-            if (loginPassword.value.trim() === "") {
 
-                loginPassword.style.border = "2px solid red";
+            if (
+                loginPassword.value.trim() === ""
+            ) {
+
+                loginPassword.style.border =
+                    "2px solid red";
 
             }
 
@@ -108,22 +127,101 @@ if (loginForm) {
 
         }
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Check email format
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 
         if (!emailPattern.test(email.value)) {
 
-            message.textContent = "Please enter a valid email address.";
-            message.style.color = "red";
+            message.textContent =
+                "Please enter a valid email address.";
 
-            email.style.border = "2px solid red";
+            message.style.color =
+                "red";
+
+            email.style.border =
+                "2px solid red";
 
             return;
 
         }
 
-        message.textContent = "✅ Login Successful!";
-        message.style.color = "green";
-        localStorage.setItem("isLoggedIn", "true");
+
+        // Get registered account
+
+        const savedUser =
+            localStorage.getItem("registeredUser");
+
+
+        if (!savedUser) {
+
+            message.textContent =
+                "No registered account found. Please register first.";
+
+            message.style.color =
+                "red";
+
+            return;
+
+        }
+
+
+        const registeredUser =
+            JSON.parse(savedUser);
+
+
+        // Check email and password
+
+        if (
+            email.value.trim() !==
+                registeredUser.email ||
+            loginPassword.value !==
+                registeredUser.password
+        ) {
+
+            message.textContent =
+                "❌ Incorrect email or password.";
+
+            message.style.color =
+                "red";
+
+            email.style.border =
+                "2px solid red";
+
+            loginPassword.style.border =
+                "2px solid red";
+
+            return;
+
+        }
+
+
+        // Successful login
+
+        localStorage.setItem(
+            "isLoggedIn",
+            "true"
+        );
+
+
+        message.textContent =
+            "✅ Login Successful!";
+
+        message.style.color =
+            "green";
+
+
+        // Open Student Dashboard
+
+        setTimeout(function () {
+
+            window.location.href =
+                "student-dashboard.html";
+
+        }, 500);
 
     });
 

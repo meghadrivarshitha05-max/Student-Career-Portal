@@ -4,7 +4,52 @@
 
 console.log("Student Dashboard Loaded");
 
-const studentName = "Varshitha";
+// ==========================================
+// LOGIN PROTECTION
+// ==========================================
+
+const isLoggedIn =
+    localStorage.getItem("isLoggedIn");
+
+if (isLoggedIn !== "true") {
+
+    window.location.href =
+        "login.html";
+
+}
+
+// ===========================
+// DYNAMIC STUDENT NAME
+// ===========================
+
+const savedUser =
+    localStorage.getItem("registeredUser");
+
+let studentName = "Student";
+
+if (savedUser) {
+
+    try {
+
+        const registeredUser =
+            JSON.parse(savedUser);
+
+        if (registeredUser.name) {
+
+            studentName =
+                registeredUser.name;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Unable to load student name."
+        );
+
+    }
+
+}
 
 const welcomeHeading =
     document.getElementById("welcomeHeading");
@@ -12,7 +57,7 @@ const welcomeHeading =
 if (welcomeHeading) {
 
     welcomeHeading.textContent =
-        `Welcome Back, ${studentName} 👋`;
+        `Welcome, ${studentName}! 👋`;
 
 }
 
@@ -269,29 +314,21 @@ if (placementBtn) {
 
 if (logoutBtn) {
 
-    logoutBtn.addEventListener(
-        "click",
-        function () {
+    logoutBtn.addEventListener("click", function () {
 
-            const confirmLogout =
-                confirm(
-                    "Are you sure you want to logout?"
-                );
+        const confirmLogout =
+            confirm("Are you sure you want to logout?");
 
+        if (confirmLogout) {
 
-            if (confirmLogout) {
+            localStorage.removeItem("isLoggedIn");
 
-                localStorage.removeItem(
-                    "isLoggedIn"
-                );
-
-                window.location.href =
-                    "login.html";
-
-            }
+            window.location.href =
+                "login.html";
 
         }
-    );
+
+    });
 
 }
 

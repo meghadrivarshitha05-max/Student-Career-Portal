@@ -78,13 +78,23 @@ View your academic details, skills, placement status and resume.
     <th>Name</th>
 
     <td>
+<input
+    type="text"
+    id="profileName"
+    disabled>
 
-        <input
-            type="text"
-            id="profileName"
-            value="Meghadri Varshitha"
-            disabled>
+    </td>
 
+</tr>
+<tr>
+    <th>Email</th>
+
+    <td>
+
+<input
+    type="email"
+    id="profileEmail"
+    disabled>
     </td>
 
 </tr>
@@ -135,6 +145,29 @@ View your academic details, skills, placement status and resume.
     </button>
 
 </div>
+
+<section class="dashboard-section">
+
+    <h2>📊 Profile Completion</h2>
+
+    <div class="profile-progress-container">
+
+        <div class="profile-progress-bar">
+
+            <div
+                id="profileProgress"
+                class="profile-progress">
+            </div>
+
+        </div>
+
+        <p id="profileProgressText">
+            Profile Completion: 0%
+        </p>
+
+    </div>
+
+</section>
 
 <section class="dashboard-section">
 

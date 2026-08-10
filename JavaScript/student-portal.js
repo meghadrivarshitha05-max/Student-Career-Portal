@@ -1,4 +1,18 @@
 // ==========================================
+// LOGIN PROTECTION
+// ==========================================
+
+const isLoggedIn =
+    localStorage.getItem("isLoggedIn");
+
+if (isLoggedIn !== "true") {
+
+    window.location.href =
+        "login.html";
+
+}
+
+// ==========================================
 // STUDENT PORTAL JAVASCRIPT
 // ==========================================
 
@@ -11,22 +25,41 @@ console.log("Student Portal Loaded");
 
 function updateDateTime() {
 
-    const dateElement = document.getElementById("currentDate");
-    const timeElement = document.getElementById("currentTime");
+    const dateElement =
+        document.getElementById("currentDate");
+
+    const timeElement =
+        document.getElementById("currentTime");
 
     const now = new Date();
 
+
     if (dateElement) {
+
         dateElement.textContent =
-            "Date: " + now.toLocaleDateString();
+            "📅 " +
+            now.toLocaleDateString("en-US", {
+
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+
+            });
+
     }
 
+
     if (timeElement) {
+
         timeElement.textContent =
-            "Time: " + now.toLocaleTimeString();
+            "🕒 " +
+            now.toLocaleTimeString();
+
     }
 
 }
+
 
 updateDateTime();
 
@@ -34,57 +67,170 @@ setInterval(updateDateTime, 1000);
 
 
 // ==========================================
-// 2. PROFILE EDIT AND SAVE
+// 2. PROFILE ELEMENTS
 // ==========================================
 
-const editBtn = document.getElementById("editProfileBtn");
-const saveBtn = document.getElementById("saveProfileBtn");
+const editBtn =
+    document.getElementById("editProfileBtn");
 
-const profileName = document.getElementById("profileName");
+const saveBtn =
+    document.getElementById("saveProfileBtn");
+
+const profileName =
+    document.getElementById("profileName");
+
+const profileEmail =
+    document.getElementById("profileEmail");
+
+const profilePhone =
+    document.getElementById("profilePhone");
+
+const profileCollege =
+    document.getElementById("profileCollege");
+
+const profileBranch =
+    document.getElementById("profileBranch");
+
+const profileYear =
+    document.getElementById("profileYear");
 
 
-// Edit Profile
-if (editBtn && profileName) {
+// ==========================================
+// 3. PROFILE INPUTS
+// ==========================================
+
+const profileInputs = [
+
+    profileName,
+    profileEmail,
+    profilePhone,
+    profileCollege,
+    profileBranch,
+    profileYear
+
+];
+
+
+// ==========================================
+// 4. EDIT PROFILE
+// ==========================================
+
+if (editBtn) {
 
     editBtn.addEventListener("click", function () {
 
-        profileName.disabled = false;
+        profileInputs.forEach(function (input) {
 
-        profileName.focus();
+            if (input) {
 
-        alert("You can now edit your profile.");
+                input.disabled = false;
+
+            }
+
+        });
+
+
+        if (profileName) {
+
+            profileName.focus();
+
+        }
+
+
+        alert(
+            "You can now edit your profile."
+        );
 
     });
 
 }
 
 
-// Save Profile
-if (saveBtn && profileName) {
+// ==========================================
+// 5. SAVE PROFILE
+// ==========================================
+
+if (saveBtn) {
 
     saveBtn.addEventListener("click", function () {
 
-        const studentProfile = {
-            name: profileName.value.trim()
-        };
+        if (
+            profileName &&
+            profileName.value.trim() === ""
+        ) {
 
-        if (studentProfile.name === "") {
-
-            alert("Please enter your name.");
+            alert(
+                "Please enter your name."
+            );
 
             profileName.focus();
 
             return;
+
         }
 
+
+        const studentProfile = {
+
+            name:
+                profileName
+                    ? profileName.value.trim()
+                    : "",
+
+            email:
+                profileEmail
+                    ? profileEmail.value.trim()
+                    : "",
+
+            phone:
+                profilePhone
+                    ? profilePhone.value.trim()
+                    : "",
+
+            college:
+                profileCollege
+                    ? profileCollege.value.trim()
+                    : "",
+
+            branch:
+                profileBranch
+                    ? profileBranch.value.trim()
+                    : "",
+
+            year:
+                profileYear
+                    ? profileYear.value.trim()
+                    : ""
+
+        };
+
+
         localStorage.setItem(
+
             "studentProfile",
+
             JSON.stringify(studentProfile)
+
         );
 
-        profileName.disabled = true;
 
-        alert("Profile Saved Successfully!");
+        profileInputs.forEach(function (input) {
+
+            if (input) {
+
+                input.disabled = true;
+
+            }
+
+        });
+
+
+        alert(
+            "Profile Saved Successfully!"
+        );
+
+
+        updateProfileCompletion();
 
     });
 
@@ -92,10 +238,50 @@ if (saveBtn && profileName) {
 
 
 // ==========================================
-// 3. LOAD SAVED PROFILE
+// LOAD STUDENT PROFILE
 // ==========================================
 
 if (profileName) {
+
+    const savedUser =
+        localStorage.getItem("registeredUser");
+
+    if (savedUser) {
+
+        try {
+
+            const registeredUser =
+                JSON.parse(savedUser);
+
+            if (registeredUser.name) {
+
+                profileName.value =
+                    registeredUser.name;
+
+            }
+
+            const profileEmail =
+    document.getElementById("profileEmail");
+
+if (registeredUser.email && profileEmail) {
+
+    profileEmail.value =
+        registeredUser.email;
+
+}
+
+        } catch (error) {
+
+            console.log(
+                "Unable to load registered user."
+            );
+
+        }
+
+    }
+
+
+    // Load manually saved profile if available
 
     const savedProfile =
         localStorage.getItem("studentProfile");
@@ -116,7 +302,9 @@ if (profileName) {
 
         } catch (error) {
 
-            console.log("Unable to load saved profile.");
+            console.log(
+                "Unable to load saved profile."
+            );
 
         }
 
@@ -124,9 +312,8 @@ if (profileName) {
 
 }
 
-
 // ==========================================
-// 4. RESUME MANAGEMENT
+// 7. RESUME ELEMENTS
 // ==========================================
 
 const resumeInput =
@@ -142,356 +329,198 @@ const replaceResumeBtn =
     document.getElementById("replaceResumeBtn");
 
 
-// Load saved resume name
+// ==========================================
+// 8. LOAD SAVED RESUME
+// ==========================================
+
 const savedResume =
     localStorage.getItem("resumeName");
+
 
 if (savedResume && resumeStatus) {
 
     resumeStatus.textContent =
-        "📄 Current Resume: " + savedResume;
+        "📄 Current Resume: " +
+        savedResume;
 
-    resumeStatus.style.color = "green";
-
-}
-
-
-// Upload Resume
-if (resumeInput) {
-
-    resumeInput.addEventListener("change", function () {
-
-        if (resumeInput.files.length === 0) {
-            return;
-        }
-
-        const selectedFile =
-            resumeInput.files[0];
-
-
-        // Check PDF
-        if (selectedFile.type !== "application/pdf") {
-
-            alert("Please select a PDF file.");
-
-            resumeInput.value = "";
-
-            return;
-        }
-
-
-        // Check file size
-        const maxSize =
-            5 * 1024 * 1024;
-
-        if (selectedFile.size > maxSize) {
-
-            alert("Resume must be less than 5 MB.");
-
-            resumeInput.value = "";
-
-            return;
-        }
-
-
-        // Save resume filename
-        localStorage.setItem(
-            "resumeName",
-            selectedFile.name
-        );
-
-
-        // Show resume status
-        if (resumeStatus) {
-
-            resumeStatus.textContent =
-                "📄 Current Resume: " +
-                selectedFile.name;
-
-            resumeStatus.style.color = "green";
-
-        }
-
-        alert("Resume uploaded successfully!");
-
-    });
+    resumeStatus.style.color =
+        "green";
 
 }
 
 
 // ==========================================
-// 5. VIEW RESUME
+// 9. RESUME UPLOAD
 // ==========================================
-
-if (viewResumeBtn) {
-
-    viewResumeBtn.addEventListener("click", function () {
-
-        const resumeName =
-            localStorage.getItem("resumeName");
-
-        if (resumeName) {
-
-            alert(
-                "Your current resume is:\n\n" +
-                resumeName
-            );
-
-        } else {
-
-            alert(
-                "No resume has been uploaded yet."
-            );
-
-        }
-
-    });
-
-}
-
-
-// ==========================================
-// 6. REPLACE RESUME
-// ==========================================
-
-if (replaceResumeBtn && resumeInput) {
-
-    replaceResumeBtn.addEventListener("click", function () {
-
-        resumeInput.click();
-
-    });
-
-}
-
-
-// ==========================================
-// 7. NOTIFICATIONS
-// ==========================================
-
-const notificationList =
-    document.getElementById("notificationList");
-
-if (notificationList) {
-
-    const notifications = [
-
-        "📢 New course material has been uploaded.",
-
-        "💼 TCS placement registration is open.",
-
-        "📄 Please keep your resume updated.",
-
-        "📝 Check your upcoming assignment deadlines."
-
-    ];
-
-
-    notifications.forEach(function (notification) {
-
-        const listItem =
-            document.createElement("li");
-
-        listItem.textContent =
-            notification;
-
-        notificationList.appendChild(listItem);
-
-    });
-
-}
-
-
-// ==========================================
-// STUDENT PORTAL READY
-// ==========================================
-
-console.log("Student Portal JavaScript Ready");
-
-// ==========================================
-// DARK MODE
-// ==========================================
-
-const themeToggle = document.getElementById("themeToggle");
-
-if (themeToggle) {
-
-    themeToggle.addEventListener("click", function () {
-
-        document.body.classList.toggle("dark-mode");
-
-        if (document.body.classList.contains("dark-mode")) {
-
-            themeToggle.textContent = "☀️ Light Mode";
-
-            localStorage.setItem("theme", "dark");
-
-        } else {
-
-            themeToggle.textContent = "🌙 Dark Mode";
-
-            localStorage.setItem("theme", "light");
-
-        }
-
-    });
-
-}
-
-
-// Load saved theme
-
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "dark") {
-
-    document.body.classList.add("dark-mode");
-
-    if (themeToggle) {
-        themeToggle.textContent = "☀️ Light Mode";
-    }
-
-}
-
-// ==========================================
-// RESUME MANAGEMENT
-// ==========================================
-
-const resumeInput =
-    document.getElementById("resume");
-
 
 if (resumeInput) {
 
-    resumeInput.addEventListener("change", function () {
+    resumeInput.addEventListener(
+        "change",
+        function () {
 
-        const file =
-            resumeInput.files[0];
+            if (
+                resumeInput.files.length === 0
+            ) {
+
+                return;
+
+            }
 
 
-        if (!file) {
-            return;
-        }
+            const selectedFile =
+                resumeInput.files[0];
 
 
-        // Check PDF
-        if (file.type !== "application/pdf") {
+            // Check PDF
 
-            alert(
-                "Please select a PDF file only."
+            if (
+                selectedFile.type !==
+                "application/pdf"
+            ) {
+
+                alert(
+                    "Please select a PDF file only."
+                );
+
+                resumeInput.value = "";
+
+                return;
+
+            }
+
+
+            // Check file size
+
+            const maxSize =
+                5 * 1024 * 1024;
+
+
+            if (
+                selectedFile.size >
+                maxSize
+            ) {
+
+                alert(
+                    "Resume must be less than 5 MB."
+                );
+
+                resumeInput.value = "";
+
+                return;
+
+            }
+
+
+            // Save filename
+
+            localStorage.setItem(
+
+                "resumeName",
+
+                selectedFile.name
+
             );
 
-            resumeInput.value = "";
 
-            return;
+            // Update status
+
+            if (resumeStatus) {
+
+                resumeStatus.textContent =
+                    "📄 Current Resume: " +
+                    selectedFile.name;
+
+                resumeStatus.style.color =
+                    "green";
+
+            }
+
+
+            alert(
+                "Resume uploaded successfully!"
+            );
+
+
+            updateProfileCompletion();
 
         }
-
-
-        // Save resume filename
-        localStorage.setItem(
-            "resumeName",
-            file.name
-        );
-
-
-        alert(
-            "Resume uploaded successfully!\n\n" +
-            file.name
-        );
-
-    });
-
-}
-
-
-// ==========================================
-// LOAD SAVED RESUME
-// ==========================================
-
-const savedResume =
-    localStorage.getItem("resumeName");
-
-
-if (savedResume && resumeInput) {
-
-    const resumeMessage =
-        document.createElement("p");
-
-    resumeMessage.textContent =
-        "📄 Current Resume: " + savedResume;
-
-    resumeMessage.style.fontWeight =
-        "bold";
-
-    resumeInput.parentNode.insertBefore(
-        resumeMessage,
-        resumeInput.nextSibling
     );
 
 }
 
-// ==========================================
-// VIEW RESUME
-// ==========================================
 
-const viewResumeBtn =
-    document.getElementById("viewResumeBtn");
+// ==========================================
+// 10. VIEW RESUME
+// ==========================================
 
 if (viewResumeBtn) {
 
-    viewResumeBtn.addEventListener("click", function () {
+    viewResumeBtn.addEventListener(
+        "click",
+        function () {
 
-        const savedResume =
-            localStorage.getItem("resumeName");
+            const currentResume =
+                localStorage.getItem(
+                    "resumeName"
+                );
 
-        if (!savedResume) {
+
+            if (!currentResume) {
+
+                alert(
+                    "No resume has been uploaded yet."
+                );
+
+                return;
+
+            }
+
 
             alert(
-                "No resume has been uploaded yet."
+
+                "Your current resume is:\n\n" +
+                currentResume
+
             );
 
-            return;
-
         }
-
-        alert(
-            "Current Resume:\n\n" +
-            savedResume
-        );
-
-    });
+    );
 
 }
 
 
 // ==========================================
-// REPLACE RESUME
+// 11. REPLACE RESUME
 // ==========================================
-
-const replaceResumeBtn =
-    document.getElementById("replaceResumeBtn");
 
 if (replaceResumeBtn) {
 
-    replaceResumeBtn.addEventListener("click", function () {
+    replaceResumeBtn.addEventListener(
+        "click",
+        function () {
 
-        if (resumeInput) {
+            if (resumeInput) {
 
-            resumeInput.click();
+                resumeInput.click();
+
+            }
 
         }
-
-    });
+    );
 
 }
 
+
 // ==========================================
-// NOTIFICATIONS
+// 12. NOTIFICATIONS
 // ==========================================
 
 const notificationList =
-    document.getElementById("notificationList");
+    document.getElementById(
+        "notificationList"
+    );
+
 
 if (notificationList) {
 
@@ -508,18 +537,266 @@ if (notificationList) {
     ];
 
 
-    notifications.forEach(function (notification) {
+    notificationList.innerHTML = "";
 
-        const listItem =
-            document.createElement("li");
 
-        listItem.textContent =
-            notification;
+    notifications.forEach(
+        function (notification) {
 
-        notificationList.appendChild(
-            listItem
-        );
+            const listItem =
+                document.createElement("li");
 
-    });
+
+            listItem.textContent =
+                notification;
+
+
+            notificationList.appendChild(
+                listItem
+            );
+
+        }
+    );
 
 }
+
+
+// ==========================================
+// 13. DARK MODE
+// ==========================================
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+
+if (themeToggle) {
+
+    themeToggle.addEventListener(
+        "click",
+        function () {
+
+            document.body.classList.toggle(
+                "dark-mode"
+            );
+
+
+            if (
+                document.body.classList.contains(
+                    "dark-mode"
+                )
+            ) {
+
+                themeToggle.textContent =
+                    "☀️ Light Mode";
+
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+
+            }
+
+            else {
+
+                themeToggle.textContent =
+                    "🌙 Dark Mode";
+
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+// Load saved theme
+
+const savedTheme =
+    localStorage.getItem("theme");
+
+
+if (savedTheme === "dark") {
+
+    document.body.classList.add(
+        "dark-mode"
+    );
+
+
+    if (themeToggle) {
+
+        themeToggle.textContent =
+            "☀️ Light Mode";
+
+    }
+
+}
+
+
+// ==========================================
+// 14. PROFILE COMPLETION
+// ==========================================
+
+function updateProfileCompletion() {
+
+    const profileProgress =
+        document.getElementById(
+            "profileProgress"
+        );
+
+    const profileProgressText =
+        document.getElementById(
+            "profileProgressText"
+        );
+
+
+    if (
+        !profileProgress ||
+        !profileProgressText
+    ) {
+
+        return;
+
+    }
+
+
+    let completedFields = 0;
+
+    const totalFields = 8;
+
+
+    // Name
+
+    if (
+        profileName &&
+        profileName.value.trim() !== ""
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // Email
+
+    if (
+        profileEmail &&
+        profileEmail.value.trim() !== ""
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // Phone
+
+    if (
+        profilePhone &&
+        profilePhone.value.trim() !== ""
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // College
+
+    if (
+        profileCollege &&
+        profileCollege.value.trim() !== ""
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // Branch
+
+    if (
+        profileBranch &&
+        profileBranch.value.trim() !== ""
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // Year
+
+    if (
+        profileYear &&
+        profileYear.value.trim() !== ""
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // Resume
+
+    if (
+        localStorage.getItem(
+            "resumeName"
+        )
+    ) {
+
+        completedFields++;
+
+    }
+
+
+    // Skills
+
+    const skills =
+        document.querySelectorAll(
+            ".action-grid .action-btn"
+        );
+
+
+    if (skills.length > 0) {
+
+        completedFields++;
+
+    }
+
+
+    const percentage =
+        Math.round(
+
+            (
+                completedFields /
+                totalFields
+            ) * 100
+
+        );
+
+
+    profileProgress.style.width =
+        percentage + "%";
+
+
+    profileProgressText.textContent =
+        "Profile Completion: " +
+        percentage +
+        "%";
+
+}
+
+
+// Update profile completion
+
+updateProfileCompletion();
+
+
+console.log(
+    "Student Portal JavaScript Ready"
+);
