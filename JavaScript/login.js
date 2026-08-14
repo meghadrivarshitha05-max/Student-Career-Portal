@@ -1,10 +1,14 @@
 // ===========================
 // LOGIN PASSWORD SHOW / HIDE
 // ===========================
+
 console.log("login.js loaded");
 
-const loginPassword = document.getElementById("login-password");
-const togglePassword = document.getElementById("togglePassword");
+const loginPassword =
+    document.getElementById("login-password");
+
+const togglePassword =
+    document.getElementById("togglePassword");
 
 if (loginPassword && togglePassword) {
 
@@ -26,17 +30,20 @@ if (loginPassword && togglePassword) {
 
 }
 
+
 // ===========================
 // PASSWORD STRENGTH
 // ===========================
 
-const strength = document.getElementById("passwordStrength");
+const strength =
+    document.getElementById("passwordStrength");
 
 if (loginPassword && strength) {
 
     loginPassword.addEventListener("input", function () {
 
-        let password = loginPassword.value;
+        const password =
+            loginPassword.value;
 
         if (password.length === 0) {
 
@@ -46,21 +53,27 @@ if (loginPassword && strength) {
 
         else if (password.length < 6) {
 
-            strength.textContent = "🔴 Weak Password";
+            strength.textContent =
+                "🔴 Weak Password";
+
             strength.style.color = "red";
 
         }
 
         else if (password.length < 10) {
 
-            strength.textContent = "🟡 Medium Password";
+            strength.textContent =
+                "🟡 Medium Password";
+
             strength.style.color = "orange";
 
         }
 
         else {
 
-            strength.textContent = "🟢 Strong Password";
+            strength.textContent =
+                "🟢 Strong Password";
+
             strength.style.color = "green";
 
         }
@@ -69,17 +82,20 @@ if (loginPassword && strength) {
 
 }
 
+
 // ===========================
 // LOGIN VALIDATION
 // ===========================
 
-const loginForm = document.getElementById("loginForm");
+const loginForm =
+    document.getElementById("loginForm");
 
 if (loginForm) {
 
     loginForm.addEventListener("submit", function (event) {
 
         event.preventDefault();
+
 
         const email =
             document.getElementById("login-email");
@@ -88,11 +104,16 @@ if (loginForm) {
             document.getElementById("loginMessage");
 
 
+        // Remove old borders
+
         email.style.border = "";
+
         loginPassword.style.border = "";
 
 
-        // Check empty fields
+        // ===========================
+        // CHECK EMPTY FIELDS
+        // ===========================
 
         if (
             email.value.trim() === "" ||
@@ -102,8 +123,7 @@ if (loginForm) {
             message.textContent =
                 "Please fill all fields.";
 
-            message.style.color =
-                "red";
+            message.style.color = "red";
 
 
             if (email.value.trim() === "") {
@@ -114,9 +134,7 @@ if (loginForm) {
             }
 
 
-            if (
-                loginPassword.value.trim() === ""
-            ) {
+            if (loginPassword.value.trim() === "") {
 
                 loginPassword.style.border =
                     "2px solid red";
@@ -128,19 +146,20 @@ if (loginForm) {
         }
 
 
-        // Check email format
+        // ===========================
+        // CHECK EMAIL FORMAT
+        // ===========================
 
         const emailPattern =
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-        if (!emailPattern.test(email.value)) {
+        if (!emailPattern.test(email.value.trim())) {
 
             message.textContent =
                 "Please enter a valid email address.";
 
-            message.style.color =
-                "red";
+            message.style.color = "red";
 
             email.style.border =
                 "2px solid red";
@@ -150,43 +169,98 @@ if (loginForm) {
         }
 
 
-        // Get registered account
+        // ===========================
+        // GET ALL REGISTERED USERS
+        // ===========================
 
-        const savedUser =
-            localStorage.getItem("registeredUser");
+        const savedUsers =
+            localStorage.getItem("registeredUsers");
 
 
-        if (!savedUser) {
+        if (!savedUsers) {
 
             message.textContent =
                 "No registered account found. Please register first.";
 
-            message.style.color =
-                "red";
+            message.style.color = "red";
 
             return;
 
         }
 
 
+        let users;
+
+        try {
+
+            users =
+                JSON.parse(savedUsers);
+
+        } catch (error) {
+
+            console.log(
+                "Unable to load registered users."
+            );
+
+            message.textContent =
+                "Unable to load registered accounts.";
+
+            message.style.color = "red";
+
+            return;
+
+        }
+
+
+        // Make sure users is an array
+
+        if (!Array.isArray(users)) {
+
+            message.textContent =
+                "No registered account found. Please register first.";
+
+            message.style.color = "red";
+
+            return;
+
+        }
+
+
+        // ===========================
+        // FIND CURRENT USER
+        // ===========================
+
+        const enteredEmail =
+            email.value.trim().toLowerCase();
+
+        const enteredPassword =
+            loginPassword.value;
+
+
         const registeredUser =
-            JSON.parse(savedUser);
+            users.find(function (user) {
+
+                return (
+                    user.email.toLowerCase() ===
+                        enteredEmail &&
+                    user.password ===
+                        enteredPassword
+                );
+
+            });
 
 
-        // Check email and password
+        // ===========================
+        // INVALID LOGIN
+        // ===========================
 
-        if (
-            email.value.trim() !==
-                registeredUser.email ||
-            loginPassword.value !==
-                registeredUser.password
-        ) {
+        if (!registeredUser) {
 
             message.textContent =
                 "❌ Incorrect email or password.";
 
-            message.style.color =
-                "red";
+            message.style.color = "red";
+
 
             email.style.border =
                 "2px solid red";
@@ -199,11 +273,29 @@ if (loginForm) {
         }
 
 
-        // Successful login
+        // ===========================
+        // SUCCESSFUL LOGIN
+        // ===========================
 
         localStorage.setItem(
             "isLoggedIn",
             "true"
+        );
+
+
+        // Save currently logged-in user
+
+        localStorage.setItem(
+            "currentUser",
+            JSON.stringify(registeredUser)
+        );
+
+
+        // Also save current user's email separately
+
+        localStorage.setItem(
+            "currentUserEmail",
+            registeredUser.email
         );
 
 
@@ -214,7 +306,9 @@ if (loginForm) {
             "green";
 
 
-        // Open Student Dashboard
+        // ===========================
+        // OPEN STUDENT DASHBOARD
+        // ===========================
 
         setTimeout(function () {
 
@@ -227,11 +321,13 @@ if (loginForm) {
 
 }
 
+
 // ===========================
-// REMOVE RED BORDER
+// REMOVE RED BORDER - EMAIL
 // ===========================
 
-const emailInput = document.getElementById("login-email");
+const emailInput =
+    document.getElementById("login-email");
 
 if (emailInput) {
 
@@ -243,6 +339,11 @@ if (emailInput) {
 
 }
 
+
+// ===========================
+// REMOVE RED BORDER - PASSWORD
+// ===========================
+
 if (loginPassword) {
 
     loginPassword.addEventListener("input", function () {
@@ -252,3 +353,6 @@ if (loginPassword) {
     });
 
 }
+
+
+console.log("Login JavaScript Ready");

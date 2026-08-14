@@ -71,7 +71,6 @@ if (
         checkPasswordMatch
     );
 
-
     confirmPassword.addEventListener(
         "input",
         checkPasswordMatch
@@ -179,7 +178,9 @@ if (registerForm) {
             event.preventDefault();
 
 
-            // Check password match
+            // ===========================
+            // CHECK PASSWORD MATCH
+            // ===========================
 
             if (
                 registerPassword.value !==
@@ -195,54 +196,176 @@ if (registerForm) {
             }
 
 
-            // Get email
+            // ===========================
+            // GET INPUTS
+            // ===========================
+
+            const nameInput =
+                document.getElementById("fullname");
 
             const emailInput =
                 document.getElementById("email");
 
 
-            if (!emailInput) {
+            if (
+                !nameInput ||
+                !emailInput
+            ) {
+
+                alert(
+                    "Unable to find registration fields."
+                );
 
                 return;
 
             }
 
 
-            // Save account
+            const name =
+                nameInput.value.trim();
 
-           const nameInput =
-    document.getElementById("fullname");
+            const email =
+                emailInput.value.trim().toLowerCase();
 
-const registeredUser = {
-
-    name:
-        nameInput.value.trim(),
-
-    email:
-        emailInput.value.trim(),
-
-    password:
-        registerPassword.value
-
-};
+            const password =
+                registerPassword.value;
 
 
-            localStorage.setItem(
-                "registeredUser",
-                JSON.stringify(
-                    registeredUser
-                )
+            // ===========================
+            // CHECK EMPTY VALUES
+            // ===========================
+
+            if (
+                name === "" ||
+                email === "" ||
+                password === ""
+            ) {
+
+                alert(
+                    "Please fill all required fields."
+                );
+
+                return;
+
+            }
+
+
+            // ===========================
+            // GET EXISTING USERS
+            // ===========================
+
+            let users = [];
+
+
+            const savedUsers =
+                localStorage.getItem(
+                    "registeredUsers"
+                );
+
+
+            if (savedUsers) {
+
+                try {
+
+                    users =
+                        JSON.parse(savedUsers);
+
+                } catch (error) {
+
+                    console.log(
+                        "Unable to load existing users."
+                    );
+
+                    users = [];
+
+                }
+
+            }
+
+
+            // ===========================
+            // MAKE SURE USERS IS ARRAY
+            // ===========================
+
+            if (!Array.isArray(users)) {
+
+                users = [];
+
+            }
+
+
+            // ===========================
+            // CHECK DUPLICATE EMAIL
+            // ===========================
+
+            const existingUser =
+                users.find(function (user) {
+
+                    return (
+                        user.email.toLowerCase() ===
+                        email
+                    );
+
+                });
+
+
+            if (existingUser) {
+
+                alert(
+                    "An account with this email already exists. Please login."
+                );
+
+                return;
+
+            }
+
+
+            // ===========================
+            // CREATE NEW USER
+            // ===========================
+
+            const registeredUser = {
+
+                name: name,
+
+                email: email,
+
+                password: password
+
+            };
+
+
+            // ===========================
+            // ADD USER TO ARRAY
+            // ===========================
+
+            users.push(
+                registeredUser
             );
 
 
-            // Registration successful
+            // ===========================
+            // SAVE ALL USERS
+            // ===========================
+
+            localStorage.setItem(
+                "registeredUsers",
+                JSON.stringify(users)
+            );
+
+
+            // ===========================
+            // REGISTRATION SUCCESS
+            // ===========================
 
             alert(
                 "Registration successful! Please login."
             );
 
 
-            // Redirect to login
+            // ===========================
+            // REDIRECT TO LOGIN
+            // ===========================
 
             setTimeout(
                 function () {
@@ -259,6 +382,10 @@ const registeredUser = {
 
 }
 
+
+// ===========================
+// DEBUG
+// ===========================
 
 console.log(
     document.getElementById("password")

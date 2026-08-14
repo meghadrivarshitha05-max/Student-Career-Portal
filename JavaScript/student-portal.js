@@ -18,6 +18,49 @@ if (isLoggedIn !== "true") {
 
 console.log("Student Portal Loaded");
 
+// ==========================================
+// DYNAMIC LOGGED-IN STUDENT NAME
+// ==========================================
+
+const currentUserData =
+    localStorage.getItem("currentUser");
+
+let studentName = "Student";
+
+if (currentUserData) {
+
+    try {
+
+        const currentUser =
+            JSON.parse(currentUserData);
+
+        if (currentUser.name) {
+
+            studentName =
+                currentUser.name;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Unable to load current user."
+        );
+
+    }
+ 
+}
+
+const welcomeHeading =
+    document.getElementById("welcomeHeading");
+
+if (welcomeHeading) {
+
+    welcomeHeading.textContent =
+        `Welcome, ${studentName}! 👋`;
+
+}
+
 
 // ==========================================
 // 1. LIVE DATE AND TIME
@@ -205,13 +248,35 @@ if (saveBtn) {
         };
 
 
-        localStorage.setItem(
+        const currentUserData =
+    localStorage.getItem("currentUser");
 
-            "studentProfile",
+if (!currentUserData) {
 
-            JSON.stringify(studentProfile)
+    alert("Unable to identify the logged-in user.");
 
-        );
+    return;
+
+}
+
+const currentUser =
+    JSON.parse(currentUserData);
+
+const userEmail =
+    currentUser.email.toLowerCase();
+
+const allProfiles =
+    JSON.parse(
+        localStorage.getItem("userProfiles")
+    ) || {};
+
+allProfiles[userEmail] =
+    studentProfile;
+
+localStorage.setItem(
+    "userProfiles",
+    JSON.stringify(allProfiles)
+);
 
 
         profileInputs.forEach(function (input) {
@@ -238,116 +303,141 @@ if (saveBtn) {
 
 
 // ==========================================
-// LOAD STUDENT PROFILE
+// LOAD CURRENT USER PROFILE
 // ==========================================
 
-if (profileName) {
+const currentUserData =
+    localStorage.getItem("currentUser");
 
-    const savedUser =
-        localStorage.getItem("registeredUser");
+if (currentUserData) {
 
-    if (savedUser) {
+    try {
 
-        try {
+        const currentUser =
+            JSON.parse(currentUserData);
 
-            const registeredUser =
-                JSON.parse(savedUser);
+        // Load registered name
+        if (profileName && currentUser.name) {
 
-            if (registeredUser.name) {
-
-                profileName.value =
-                    registeredUser.name;
-
-            }
-
-            const profileEmail =
-    document.getElementById("profileEmail");
-
-if (registeredUser.email && profileEmail) {
-
-    profileEmail.value =
-        registeredUser.email;
-
-}
-
-        } catch (error) {
-
-            console.log(
-                "Unable to load registered user."
-            );
+            profileName.value =
+                currentUser.name;
 
         }
 
-    }
+        // Load registered email
+        if (profileEmail && currentUser.email) {
 
-
-    // Load manually saved profile if available
-
-    const savedProfile =
-        localStorage.getItem("studentProfile");
-
-    if (savedProfile) {
-
-        try {
-
-            const studentProfile =
-                JSON.parse(savedProfile);
-
-            if (studentProfile.name) {
-
-                profileName.value =
-                    studentProfile.name;
-
-            }
-
-        } catch (error) {
-
-            console.log(
-                "Unable to load saved profile."
-            );
+            profileEmail.value =
+                currentUser.email;
 
         }
+
+    } catch (error) {
+
+        console.log(
+            "Unable to load current user profile."
+        );
 
     }
 
 }
 
-// ==========================================
-// 7. RESUME ELEMENTS
-// ==========================================
-
-const resumeInput =
-    document.getElementById("resume");
-
-const resumeStatus =
-    document.getElementById("resumeStatus");
-
-const viewResumeBtn =
-    document.getElementById("viewResumeBtn");
-
-const replaceResumeBtn =
-    document.getElementById("replaceResumeBtn");
-
 
 // ==========================================
-// 8. LOAD SAVED RESUME
+// LOAD USER-SPECIFIC SAVED PROFILE
 // ==========================================
 
-const savedResume =
-    localStorage.getItem("resumeName");
+if (currentUserData) {
 
+    try {
 
-if (savedResume && resumeStatus) {
+        const currentUser =
+            JSON.parse(currentUserData);
 
-    resumeStatus.textContent =
-        "📄 Current Resume: " +
-        savedResume;
+        const userEmail =
+            currentUser.email.toLowerCase();
 
-    resumeStatus.style.color =
-        "green";
+        const allProfiles =
+            JSON.parse(
+                localStorage.getItem("userProfiles")
+            ) || {};
+
+        const savedProfile =
+            allProfiles[userEmail];
+
+        if (savedProfile) {
+
+            if (
+                profileName &&
+                savedProfile.name
+            ) {
+
+                profileName.value =
+                    savedProfile.name;
+
+            }
+
+            if (
+                profileEmail &&
+                savedProfile.email
+            ) {
+
+                profileEmail.value =
+                    savedProfile.email;
+
+            }
+
+            if (
+                profilePhone &&
+                savedProfile.phone
+            ) {
+
+                profilePhone.value =
+                    savedProfile.phone;
+
+            }
+
+            if (
+                profileCollege &&
+                savedProfile.college
+            ) {
+
+                profileCollege.value =
+                    savedProfile.college;
+
+            }
+
+            if (
+                profileBranch &&
+                savedProfile.branch
+            ) {
+
+                profileBranch.value =
+                    savedProfile.branch;
+
+            }
+
+            if (
+                profileYear &&
+                savedProfile.year
+            ) {
+
+                profileYear.value =
+                    savedProfile.year;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Unable to load saved profile."
+        );
+
+    }
 
 }
-
 
 // ==========================================
 // 9. RESUME UPLOAD
