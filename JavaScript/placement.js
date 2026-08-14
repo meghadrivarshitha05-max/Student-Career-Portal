@@ -27,14 +27,21 @@ console.log("Placement Page Loaded");
 const currentUserData =
     localStorage.getItem("currentUser");
 
-let currentUser = null;
+let currentUserEmail = null;
 
 if (currentUserData) {
 
     try {
 
-        currentUser =
+        const currentUser =
             JSON.parse(currentUserData);
+
+        if (currentUser.email) {
+
+            currentUserEmail =
+                currentUser.email.toLowerCase();
+
+        }
 
     } catch (error) {
 
@@ -45,34 +52,6 @@ if (currentUserData) {
     }
 
 }
-
-
-// ==========================================
-// CHECK CURRENT USER
-// ==========================================
-
-if (!currentUser || !currentUser.email) {
-
-    alert(
-        "Unable to identify the current user. Please login again."
-    );
-
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("currentUserEmail");
-
-    window.location.href =
-        "login.html";
-
-}
-
-
-// ==========================================
-// CURRENT USER EMAIL
-// ==========================================
-
-const currentUserEmail =
-    currentUser.email.toLowerCase();
 
 
 // ==========================================
@@ -87,16 +66,25 @@ applyButtons.forEach(function (button) {
 
     button.addEventListener("click", function () {
 
+        // Check current user
+
+        if (!currentUserEmail) {
+
+            alert(
+                "Unable to identify the logged-in student."
+            );
+
+            return;
+
+        }
+
+
         const company =
             button.getAttribute("data-company");
 
         const role =
             button.getAttribute("data-role");
 
-
-        // ===========================
-        // CONFIRM APPLICATION
-        // ===========================
 
         const confirmApply =
             confirm(
@@ -115,16 +103,33 @@ applyButtons.forEach(function (button) {
         }
 
 
-        // ===========================
-        // GET ALL USER APPLICATIONS
-        // ===========================
+        // ==========================================
+        // CREATE APPLICATION
+        // ==========================================
 
-        let userApplications = {};
+        const application = {
+
+            company: company,
+
+            role: role,
+
+            date:
+                new Date().toLocaleDateString()
+
+        };
+
+
+        // ==========================================
+        // GET ALL USER APPLICATIONS
+        // ==========================================
 
         const savedApplications =
             localStorage.getItem(
                 "userPlacementApplications"
             );
+
+
+        let userApplications = {};
 
 
         if (savedApplications) {
@@ -139,7 +144,7 @@ applyButtons.forEach(function (button) {
             } catch (error) {
 
                 console.log(
-                    "Unable to load previous applications."
+                    "Unable to load saved applications."
                 );
 
                 userApplications = {};
@@ -149,38 +154,27 @@ applyButtons.forEach(function (button) {
         }
 
 
-        // ===========================
-        // MAKE SURE USER HAS AN ARRAY
-        // ===========================
+        // ==========================================
+        // GET CURRENT USER'S APPLICATIONS
+        // ==========================================
 
-        if (
-            !Array.isArray(
-                userApplications[currentUserEmail]
-            )
-        ) {
-
-            userApplications[currentUserEmail] =
-                [];
-
-        }
+        const applications =
+            userApplications[currentUserEmail] || [];
 
 
-        // ===========================
+        // ==========================================
         // CHECK DUPLICATE APPLICATION
-        // ===========================
+        // ==========================================
 
         const alreadyApplied =
-            userApplications[currentUserEmail]
-                .some(function (application) {
+            applications.some(function (item) {
 
-                    return (
-                        application.company ===
-                            company &&
-                        application.role ===
-                            role
-                    );
+                return (
+                    item.company === company &&
+                    item.role === role
+                );
 
-                });
+            });
 
 
         if (alreadyApplied) {
@@ -193,45 +187,20 @@ applyButtons.forEach(function (button) {
                 "."
             );
 
-            button.textContent =
-                "✅ Applied";
-
-            button.disabled = true;
-
             return;
 
         }
 
 
-        // ===========================
-        // CREATE APPLICATION
-        // ===========================
+        // ==========================================
+        // SAVE APPLICATION
+        // ==========================================
 
-        const application = {
+        applications.push(application);
 
-            company:
-                company,
+        userApplications[currentUserEmail] =
+            applications;
 
-            role:
-                role,
-
-            date:
-                new Date().toLocaleDateString()
-
-        };
-
-
-        // ===========================
-        // ADD APPLICATION
-        // ===========================
-
-        userApplications[currentUserEmail]
-            .push(application);
-
-
-        // ===========================
-        // SAVE APPLICATIONS
-        // ===========================
 
         localStorage.setItem(
             "userPlacementApplications",
@@ -241,9 +210,9 @@ applyButtons.forEach(function (button) {
         );
 
 
-        // ===========================
-        // SUCCESS MESSAGE
-        // ===========================
+        // ==========================================
+        // UPDATE BUTTON
+        // ==========================================
 
         alert(
             "Application submitted successfully!\n\n" +
@@ -253,10 +222,6 @@ applyButtons.forEach(function (button) {
             role
         );
 
-
-        // ===========================
-        // CHANGE BUTTON
-        // ===========================
 
         button.textContent =
             "✅ Applied";
@@ -272,79 +237,81 @@ applyButtons.forEach(function (button) {
 // LOAD CURRENT USER'S APPLICATIONS
 // ==========================================
 
-const savedApplications =
-    localStorage.getItem(
-        "userPlacementApplications"
-    );
+if (currentUserEmail) {
+
+    const savedApplications =
+        localStorage.getItem(
+            "userPlacementApplications"
+        );
 
 
-if (savedApplications) {
+    if (savedApplications) {
 
-    try {
+        try {
 
-        const userApplications =
-            JSON.parse(
-                savedApplications
+            const userApplications =
+                JSON.parse(
+                    savedApplications
+                );
+
+
+            const applications =
+                userApplications[currentUserEmail]
+                || [];
+
+
+            // Mark only this user's applications
+
+            applyButtons.forEach(
+                function (button) {
+
+                    const company =
+                        button.getAttribute(
+                            "data-company"
+                        );
+
+                    const role =
+                        button.getAttribute(
+                            "data-role"
+                        );
+
+
+                    const alreadyApplied =
+                        applications.some(
+                            function (application) {
+
+                                return (
+                                    application.company ===
+                                        company &&
+                                    application.role ===
+                                        role
+                                );
+
+                            }
+                        );
+
+
+                    if (alreadyApplied) {
+
+                        button.textContent =
+                            "✅ Applied";
+
+                        button.disabled =
+                            true;
+
+                    }
+
+                }
             );
 
 
-        const applications =
-            userApplications[currentUserEmail]
-            || [];
+        } catch (error) {
 
+            console.log(
+                "Unable to load placement applications."
+            );
 
-        // ===========================
-        // DISABLE APPLIED BUTTONS
-        // ===========================
-
-        applyButtons.forEach(
-            function (button) {
-
-                const company =
-                    button.getAttribute(
-                        "data-company"
-                    );
-
-                const role =
-                    button.getAttribute(
-                        "data-role"
-                    );
-
-
-                const alreadyApplied =
-                    applications.some(
-                        function (application) {
-
-                            return (
-                                application.company ===
-                                    company &&
-                                application.role ===
-                                    role
-                            );
-
-                        }
-                    );
-
-
-                if (alreadyApplied) {
-
-                    button.textContent =
-                        "✅ Applied";
-
-                    button.disabled =
-                        true;
-
-                }
-
-            }
-        );
-
-
-    } catch (error) {
-
-        console.log(
-            "Unable to load placement applications."
-        );
+        }
 
     }
 

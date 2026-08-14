@@ -187,7 +187,7 @@ Object.keys(courses).forEach(function (buttonId) {
 
 
 // ==========================================
-// ENROLL IN COURSE
+// ENROLL IN COURSE - USER SPECIFIC
 // ==========================================
 
 if (enrollBtn) {
@@ -197,25 +197,16 @@ if (enrollBtn) {
         const selectedCourse =
             courseTitle.textContent.trim();
 
-
-        // ===========================
-        // CHECK SELECTED COURSE
-        // ===========================
-
         if (selectedCourse === "") {
 
-            alert(
-                "Please select a course first."
-            );
+            alert("Please select a course first.");
 
             return;
 
         }
 
 
-        // ===========================
-        // GET CURRENT USER
-        // ===========================
+        // Get currently logged-in user
 
         const currentUserData =
             localStorage.getItem("currentUser");
@@ -224,155 +215,117 @@ if (enrollBtn) {
         if (!currentUserData) {
 
             alert(
-                "Please login again."
+                "Unable to identify the logged-in student."
             );
-
-            window.location.href =
-                "login.html";
 
             return;
 
         }
 
-
-        let currentUser;
 
         try {
 
-            currentUser =
+            const currentUser =
                 JSON.parse(currentUserData);
 
-        } catch (error) {
 
-            alert(
-                "Unable to identify the current user."
-            );
+            if (!currentUser.email) {
 
-            return;
-
-        }
-
-
-        if (!currentUser.email) {
-
-            alert(
-                "User email not found. Please login again."
-            );
-
-            return;
-
-        }
-
-
-        const userEmail =
-            currentUser.email.toLowerCase();
-
-
-        // ===========================
-        // GET ALL USER COURSES
-        // ===========================
-
-        let userCourses = {};
-
-
-        const savedCourses =
-            localStorage.getItem(
-                "userEnrolledCourses"
-            );
-
-
-        if (savedCourses) {
-
-            try {
-
-                userCourses =
-                    JSON.parse(savedCourses);
-
-            } catch (error) {
-
-                console.log(
-                    "Unable to load enrolled courses."
+                alert(
+                    "Student email not found."
                 );
 
-                userCourses = {};
+                return;
 
             }
 
-        }
+
+            const userEmail =
+                currentUser.email.toLowerCase();
 
 
-        // ===========================
-        // MAKE SURE OBJECT
-        // ===========================
+            // Get all students' enrolled courses
 
-        if (
-            typeof userCourses !== "object" ||
-            userCourses === null ||
-            Array.isArray(userCourses)
-        ) {
-
-            userCourses = {};
-
-        }
+            const savedCourses =
+                localStorage.getItem(
+                    "userEnrolledCourses"
+                );
 
 
-        // ===========================
-        // CREATE USER COURSE LIST
-        // ===========================
-
-        if (!Array.isArray(userCourses[userEmail])) {
-
-            userCourses[userEmail] = [];
-
-        }
+            let userEnrolledCourses = {};
 
 
-        // ===========================
-        // CHECK DUPLICATE COURSE
-        // ===========================
+            if (savedCourses) {
 
-        if (
-            userCourses[userEmail]
-                .includes(selectedCourse)
-        ) {
+                userEnrolledCourses =
+                    JSON.parse(savedCourses);
 
-            alert(
-                "You are already enrolled in " +
-                selectedCourse + "."
+            }
+
+
+            // Get current student's courses
+
+            const enrolledCourses =
+                userEnrolledCourses[userEmail] || [];
+
+
+            // Check duplicate
+
+            if (
+                enrolledCourses.includes(
+                    selectedCourse
+                )
+            ) {
+
+                alert(
+                    "You are already enrolled in " +
+                    selectedCourse + "."
+                );
+
+                return;
+
+            }
+
+
+            // Add course for this student
+
+            enrolledCourses.push(
+                selectedCourse
             );
 
-            return;
+
+            userEnrolledCourses[userEmail] =
+                enrolledCourses;
+
+
+            // Save all students' course data
+
+            localStorage.setItem(
+                "userEnrolledCourses",
+                JSON.stringify(
+                    userEnrolledCourses
+                )
+            );
+
+
+            alert(
+                "You have successfully enrolled in " +
+                selectedCourse + "!"
+            );
+
+
+        } catch (error) {
+
+            console.log(
+                "Unable to save enrolled course.",
+                error
+            );
+
+            alert(
+                "Something went wrong while enrolling."
+            );
 
         }
-
-
-        // ===========================
-        // ADD COURSE
-        // ===========================
-
-        userCourses[userEmail].push(
-            selectedCourse
-        );
-
-
-        // ===========================
-        // SAVE USER COURSES
-        // ===========================
-
-        localStorage.setItem(
-            "userEnrolledCourses",
-            JSON.stringify(userCourses)
-        );
-
-
-        // ===========================
-        // SUCCESS
-        // ===========================
-
-        alert(
-            "You have successfully enrolled in " +
-            selectedCourse + "!"
-        );
 
     });
 

@@ -440,102 +440,58 @@ if (currentUserData) {
 }
 
 // ==========================================
-// 9. RESUME UPLOAD
+// 8. LOAD USER-SPECIFIC RESUME
 // ==========================================
 
-if (resumeInput) {
+let currentUserEmail = null;
 
-    resumeInput.addEventListener(
-        "change",
-        function () {
+const currentUserDataForResume =
+    localStorage.getItem("currentUser");
 
-            if (
-                resumeInput.files.length === 0
-            ) {
+if (currentUserDataForResume) {
 
-                return;
+    try {
 
-            }
+        const currentUser =
+            JSON.parse(currentUserDataForResume);
 
+        if (currentUser.email) {
 
-            const selectedFile =
-                resumeInput.files[0];
-
-
-            // Check PDF
-
-            if (
-                selectedFile.type !==
-                "application/pdf"
-            ) {
-
-                alert(
-                    "Please select a PDF file only."
-                );
-
-                resumeInput.value = "";
-
-                return;
-
-            }
-
-
-            // Check file size
-
-            const maxSize =
-                5 * 1024 * 1024;
-
-
-            if (
-                selectedFile.size >
-                maxSize
-            ) {
-
-                alert(
-                    "Resume must be less than 5 MB."
-                );
-
-                resumeInput.value = "";
-
-                return;
-
-            }
-
-
-            // Save filename
-
-            localStorage.setItem(
-
-                "resumeName",
-
-                selectedFile.name
-
-            );
-
-
-            // Update status
-
-            if (resumeStatus) {
-
-                resumeStatus.textContent =
-                    "📄 Current Resume: " +
-                    selectedFile.name;
-
-                resumeStatus.style.color =
-                    "green";
-
-            }
-
-
-            alert(
-                "Resume uploaded successfully!"
-            );
-
-
-            updateProfileCompletion();
+            currentUserEmail =
+                currentUser.email.toLowerCase();
 
         }
-    );
+
+    } catch (error) {
+
+        console.log(
+            "Unable to identify current user."
+        );
+
+    }
+
+}
+
+
+const allResumes =
+    JSON.parse(
+        localStorage.getItem("userResumes")
+    ) || {};
+
+const savedResume =
+    currentUserEmail
+        ? allResumes[currentUserEmail]
+        : null;
+
+
+if (savedResume && resumeStatus) {
+
+    resumeStatus.textContent =
+        "📄 Current Resume: " +
+        savedResume;
+
+    resumeStatus.style.color =
+        "green";
 
 }
 
